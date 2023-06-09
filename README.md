@@ -13,3 +13,7 @@ Want to see how the code works? Check out the ERD:
 https://lucid.app/lucidchart/45a4f557-3e3f-4ef1-8e69-b82e990bbbe8/edit?invitationId=inv_2002981b-c21e-4bce-b986-79794a17d4bc&page=0_0#
 
 We want to make the economy rooted in more ethical incentive structures. Why can't we grow a healthy world one Leaf at a time?
+
+Also, feel free to check out my Trello board:
+
+https://trello.com/b/OjWzpY15/unit-2-project-ga
