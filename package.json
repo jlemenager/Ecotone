@@ -1,0 +1,16 @@
+{
+  "name": "leaf",
+  "version": "1.0.0",
+  "description": "Leaf is an affiliate ecommerce store of sustainably and ethically made apparel products. From shirts to coats to shoes, Leaf has it all. Search in the upper left-hand search bar or click the dropdown menus of categories and brands to narrow your search.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^7.2.2"
+  }
+}

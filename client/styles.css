@@ -1,0 +1,106 @@
+body {
+    margin: 20px 40px;
+}
+
+/* NAV */
+
+nav {
+    display:flex;
+    align-items: row;
+    justify-content: space-between;
+}
+
+/* NAV Dropdown and Logo */
+
+#ddAndLogoDiv {
+    display:flex;
+    align-items: row;
+    justify-content: center;
+}
+
+.hamburgerBar {
+    background-color: black;
+    height:2px;
+    width:30px;
+    margin: 6px 0;
+}
+
+#hamBar1 {
+    margin-top:20px;
+}
+
+#logo{
+    margin:8px 0 0 35px;
+    height:40px;
+}
+
+/* NAV Searchbar and Submit Button */
+
+#searchBarDiv {
+    display:flex;
+    align-items: row;
+    justify-content: center;
+}
+
+#searchIconDiv {
+    border: 2px solid #d9d9d9;
+    border-radius: 40% 0 0 40%;
+    border-right:none;
+}
+
+#searchIcon {
+    width:40px;
+    margin:4px 0 0 4px;
+
+}
+
+#searchBar {
+    border: 2px solid #d9d9d9;
+    border-left:none;
+    border-right:none;
+    padding:0 0 0 10px;
+    width:270px;
+}
+
+#dropdownSearchButtons {
+    display: flex;
+    justify-content: center;
+    border: 2px solid #d9d9d9;
+    border-left:none;
+    border-radius: 0 5% 5% 0;
+}
+
+.dropdownSearchButton {
+    border-radius:5%;
+    margin:8px 5px 0;
+    border:none;
+    font-size: 12px;
+    height:30px;
+    background-color: #d9d9d9;
+}
+
+#brandsDropdownButton {
+    margin-right:10px;
+}
+
+#searchButton {
+    margin-left:10px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5% 17% 17% 5%;
+    width:90px;
+}
+
+/* NAV User Icon Dropdown */
+
+#userIconDiv {
+    margin:10px 0 0 0
+}
+
+.icon {
+    width:30px;
+    margin-left:20px;
+}
+
+/* BANNER SECTION */
+
