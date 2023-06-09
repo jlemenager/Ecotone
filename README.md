@@ -1,8 +1,8 @@
 # Leaf
 
-Leaf is an affiliate ecommerce store of sustainably and ethically made apparel products. From shirts to coats to shoes, Leaf has it all. Search in the upper right hand search bar or click the dropdown menus of categories and brands to narrow your search. 
+Leaf is an affiliate ecommerce store of sustainably and ethically made apparel products. From shirts to coats to shoes, Leaf has it all. Search in the upper left-hand search bar or click the dropdown menus of categories and brands to narrow your search. 
 
-Each time you click a product you will see their ratings in graph form with a description of the brand and their efforts to be more sustainable and ethical. In addition you can create an account, where you can see your personal User Story. Here you will see the money that you contributed to three different charities (Trees, The Rainforest Foundation, and the Malaria Consortium) from our affiliate revenue.
+Each time you click a product you will see the brand's ratings in graph form with a description of them and their efforts to be more sustainable and ethical. In addition, you can create an account, where you can see your personal User Story. Here you will see the money that you contributed to three different charities (Trees, The Rainforest Foundation, and the Malaria Consortium) from our affiliate revenue.
 
 Check out our wireframe design below:
 
