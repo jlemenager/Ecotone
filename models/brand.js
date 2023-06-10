@@ -9,9 +9,11 @@ const Brand = new Schema(
         sustainablyMade: {type:Boolean, required:true},
         locationMade: {type:String, required:true},
         bCorp: {type:Number, required:true},
+        ethicallyMade: {type:Number, required:true},
+        vegan: {type:Number, required:true},
         percentOrganic: {type:Number, required:true},
         percentCarbonNeutral: {type:Number, required:true},
-        moneyDonatedToCharities: {type:Number, required:true},
+        donateToCharities: {type:Number, required:true},
         recycledMaterialsUsed: {type:Number, required:true}
     },
     {timestamps:true}
