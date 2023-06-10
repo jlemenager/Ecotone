@@ -2,7 +2,9 @@ body {
     margin: 20px 40px;
 }
 
-/* NAV */
+/* HEADER */
+
+    /* NAV */
 
 nav {
     display:flex;
@@ -10,7 +12,7 @@ nav {
     justify-content: space-between;
 }
 
-/* NAV Dropdown and Logo */
+        /* NAV Dropdown and Logo */
 
 #ddAndLogoDiv {
     display:flex;
@@ -34,7 +36,7 @@ nav {
     height:40px;
 }
 
-/* NAV Searchbar and Submit Button */
+    /* NAV Searchbar and Submit Button */
 
 #searchBarDiv {
     display:flex;
@@ -59,7 +61,7 @@ nav {
     border-left:none;
     border-right:none;
     padding:0 0 0 10px;
-    width:270px;
+    width:300px;
 }
 
 #dropdownSearchButtons {
@@ -91,7 +93,7 @@ nav {
     width:90px;
 }
 
-/* NAV User Icon Dropdown */
+    /* NAV User Icon Dropdown */
 
 #userIconDiv {
     margin:10px 0 0 0
