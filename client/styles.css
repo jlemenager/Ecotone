@@ -10,6 +10,7 @@ nav {
     display:flex;
     align-items: row;
     justify-content: space-between;
+    margin-bottom: 150px;
 }
 
         /* NAV Dropdown and Logo */
@@ -102,6 +103,43 @@ nav {
 .icon {
     width:30px;
     margin-left:20px;
+}
+
+    /* FRONT PAGE MAIN  */
+
+#frontPageMainGrid{
+    display:grid;
+    grid-template-columns: 50%;
+
+}
+
+#frontPageMainGridLeft{
+    grid-column:1/2;
+}
+
+#mainHeaderTextBox{
+    margin-top:85px;
+}
+
+#mainHeaderH1{
+    font-size:3.5rem;
+    color:#d9d9d9;
+}
+
+#mainHeaderH2{
+    font-size:2.8rem;
+    color:#d9d9d9;
+}
+
+#frontPageMainGridRight{
+    grid-column:2/3;
+}
+
+#frontPageImage{
+    width:550px;
+    margin-right:-100px;
+    position: relative;
+    left:200px;
 }
 
 /* BANNER SECTION */
