@@ -24,8 +24,20 @@
             <div id="searchIconDiv"><img id="searchIcon" src="images/searchIcon.png" alt="searchIcon"></div>
             <input id="searchBar" type="text" value="" placeholder="Search for your favorite products here...">
             <div id="dropdownSearchButtons">
-            <button class="dropdownSearchButton" id="categoriesDropdownButton">All Categories</button>
-            <button class="dropdownSearchButton" id="brandsDropdownButton">All Brands</button>
+            <select class="dropdownSearchButton" id="categoriesDropdownButton">
+                <option value="All Categories">All Categories</option>
+                <option value="T-Shirts">T-Shirts</option>
+                <option value="Longsleeves">Longsleeves</option>
+                <option value="Jackets">Jackets</option>
+                <option value="Hoodies">Hoodies</option>
+                <option value="Sweaters">Sweaters</option>
+                <option value="Dresses">Dresses</option>
+            </select>
+            <select class="dropdownSearchButton" id="brandsDropdownButton">
+                <option value="All Brands">All Brands</option>
+                <option value="HE Apparel">HE Apparel</option>
+                <option value="MPG Sport">MPG Sport</option>
+            </select>
             </div>
             <button id="searchButton">Search</button>
         </div>
