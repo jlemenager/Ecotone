@@ -2,6 +2,8 @@
 
 const frontPageMain = document.querySelector('#frontPageMain')
 const frontPageBanners = document.querySelector('#frontPageBanners')
+const products = document.querySelector('#products')
+const logo = document.querySelector('#logo')
 
 
 //MODAL
@@ -22,8 +24,8 @@ const closeModal = () => {
 
     //Event Listeners
 
-document.querySelector('#hamburgerMenu').addEventListener('click', showModal)
-document.querySelector('#modalCloseButton').addEventListener('click', closeModal)
+document.querySelector('#hamburgerMenu').addEventListener('click', ()=>setTimeout(showModal,50))
+document.querySelector('#modalCloseButton').addEventListener('click', ()=>setTimeout(closeModal,50))
 
 
 //TYPING EFFECT  
@@ -68,9 +70,7 @@ const typingEffect = () => {
     }
 }
 
-    //Event Listeners
-    
-// document.querySelector('#searchButton').addEventListener('click', typingEffect)
+typingEffect()
 
 
 //DISPLAY PRODUCT FUNCTIONS
@@ -84,15 +84,29 @@ let product = document.querySelectorAll('.product')
     //Functions
 
 const displayProducts = async() => {
+        products.style.display = 'block'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         const response = await axios.get('http://localhost:3001/api/products')
         console.log(response)
-        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><br>${response.data.products[idx].name}<br>${response.data.products[idx].brand}${response.data.products[idx].price}${response.data.products[idx].size}`)
+        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><br>${response.data.products[idx].name}<br>${response.data.products[idx].brand}<br>$${response.data.products[idx].price}<br>${response.data.products[idx].size}`)
 }
 
     //Event Listener
 
-// dropdownOptions.forEach((elem)=>elem.addEventListener('click', displayProducts))
-
 document.querySelector('#searchButton').addEventListener('click',displayProducts)
+
+
+//GO TO HOME PAGE
+
+    //Functions
+
+const goToHomePage = () => {
+    frontPageMain.style.display = 'block'
+    frontPageBanners.style.display = 'block'
+    products.style.display = 'none'
+}
+
+    //Event Listeners
+
+logo.addEventListener('click', goToHomePage)
