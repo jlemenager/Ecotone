@@ -89,7 +89,7 @@ const displayProducts = async() => {
         frontPageBanners.style.display = 'none'
         const response = await axios.get('http://localhost:3001/api/products')
         console.log(response)
-        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><br>${response.data.products[idx].name}<br>${response.data.products[idx].brand}<br>$${response.data.products[idx].price}<br>${response.data.products[idx].size}`)
+        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
 }
 
     //Event Listener
@@ -101,12 +101,12 @@ document.querySelector('#searchButton').addEventListener('click',displayProducts
 
     //Functions
 
-const goToHomePage = () => {
-    frontPageMain.style.display = 'block'
-    frontPageBanners.style.display = 'block'
-    products.style.display = 'none'
-}
+// const goToHomePage = () => {
+//     frontPageMain.style.display = 'block'
+//     frontPageBanners.style.display = 'block'
+//     products.style.display = 'none'
+// }
 
     //Event Listeners
 
-logo.addEventListener('click', goToHomePage)
+logo.addEventListener('click', ()=>location.reload())
