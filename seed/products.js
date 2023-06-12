@@ -2,13 +2,13 @@ const db = require('../db')
 const { Brand,Category,Product } = require('../models')
 
 const createProducts = async() => {
-    const tShirts = Category.find({ name: 'T-Shirts', gender:'Neutral' })
-    const tShirtsWomen = Category.find({ name: 'T-Shirts', gender:'Women' })
-    const longsleeves = Category.find({ name: 'Longsleeves', gender: 'Neutral' })
-    const longsleevesWomen = Category.find({ name: 'Longsleeves', gender: 'Women' })
+    const tShirts = await Category.find({ name: 'T-Shirts', gender:'Neutral' })
+    const tShirtsWomen = await Category.find({ name: 'T-Shirts', gender:'Women' })
+    const longsleeves = await Category.find({ name: 'Longsleeves', gender: 'Neutral' })
+    const longsleevesWomen = await Category.find({ name: 'Longsleeves', gender: 'Women' })
 
-    const happyEarthApparel = Brand.find({ name: 'Happy Earth Apparel' })
-    const mpgSport = Brand.find({ name: 'MPG Sport' })
+    const happyEarthApparel = await Brand.find({ name: 'Happy Earth Apparel' })
+    const mpgSport = await Brand.find({ name: 'MPG Sport' })
     const products = [
         {
             name: 'California Poppies',
