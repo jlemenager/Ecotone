@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaf</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script defer src="index.js"></script>
 </head>
 <body>
@@ -46,11 +47,26 @@
             <img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">
         </div>
     </nav>
+    <div id="modal">
+        <div id="modalTextbox">
+            <button id="modalCloseButton">X</button>
+            <h3>Categories</h3>
+            <button class="modalButton" id="modalTShirtsLink">T-Shirts</button>
+            <button class="modalButton" id="modalLongsleevesLink">Longsleeves</button>
+            <button class="modalButton" id="modalJacketsLink">Jackets</button>
+            <button class="modalButton" id="modalHoodiesLink">Hoodies</button>
+            <button class="modalButton" id="modalSweatersLink">Sweaters</button>
+            <button class="modalButton" id="modalDressesLink">Dresses</button>
+            <h3>Brands</h3>
+            <button class="modalButton" id="modalHEApparelLink">Happy Earth Apparel</button>
+            <button class="modalButton" id="modalMPGSportLink">MPG Sport</button>
+        </div>
+    </div>
     <div id="frontPageMain">
         <div id="frontPageMainGrid">
             <div id="frontPageMainGridLeft">
                 <div id="mainHeaderTextBox">
-                <h1 id="mainHeaderH1">What if you could <span> </span> </h1>
+                <h1 id="mainHeaderH1">What if you could <span></span></h1>
                 <h2 id="mainHeaderH2">All just by shopping online?</h2>
                 </div>
             </div>
@@ -61,6 +77,20 @@
 
     </div>
     </header>
+    <section id="products">
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+        <div class="product"></div>
+    </section>
     <section id="frontPageBanners">
         <div id="bannerGrid">
         <div id="bannerGridLeft">

@@ -3,8 +3,8 @@ const { Schema } = require('mongoose')
 const Product = new Schema(
     {
         name: {type:String, required:true},
-        category: {type:Schema.Types.ObjectId, required:true},
-        brand: {type:Schema.Types.ObjectId, required:true},
+        category: {type:Schema.Types.ObjectId, ref: 'Category'},
+        brand: {type:Schema.Types.ObjectId, ref: 'Brand'},
         price: {type:Number, required:true},
         color: {type:String, required:true},
         size: {type:String, required:true},

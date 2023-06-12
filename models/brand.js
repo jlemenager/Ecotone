@@ -3,7 +3,7 @@ const { Schema } = require('mongoose')
 const Brand = new Schema(
     {
         name: {type:String, required:true},
-        category : {type:Schema.Types.ObjectId, required:true},
+        category : {type:Schema.Types.ObjectId, ref:'Category'},
         description: {type:String, required:true},
         ethicallyMade: {type:Boolean, required:true},
         sustainablyMade: {type:Boolean, required:true},

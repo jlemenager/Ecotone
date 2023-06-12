@@ -3,8 +3,7 @@ const { Schema } = require('mongoose')
 const Category = new Schema(
     {
         name: {type:String, required:true},
-        numOfProducts: {type:Number, required:false},
-        numOfBrands: {type:Number, required:false}
+        gender: {type:String, required:true}
     },
     {timestamps:true}
 )

@@ -2,10 +2,10 @@ const db = require('../db')
 const { Brand, Category } = require('../models')
 
 const createBrands = async() => {
-    const tShirts = Category.find({name: 'T-Shirts', gender:'Neutral'})
-    const longsleeves = Category.find({name: 'Longsleeves', gender: 'Neutral'})
-    const hoodies = Category.find({name: 'Hoodies', gender: 'Neutral'})
-    const jackets = Category.find({name: 'Jackets', gender: 'Neutral'})
+    const tShirts = Category.findOne({ name: 'T-Shirts' })
+    const longsleeves = Category.find({ name: 'Longsleeves', gender: 'Neutral' })
+    const hoodies = Category.find({ name: 'Hoodies', gender: 'Neutral' })
+    const jackets = Category.find({ name: 'Jackets', gender: 'Neutral' })
     const brands = [
         {
             name: 'Happy Earth Apparel',
