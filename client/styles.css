@@ -21,6 +21,10 @@ nav {
     justify-content: center;
 }
 
+#hamburgerMenu{
+    cursor: pointer;
+}
+
 .hamburgerBar {
     background-color: black;
     height:2px;
@@ -35,6 +39,7 @@ nav {
 #logo{
     margin:8px 0 0 35px;
     height:40px;
+    cursor: pointer;
 }
 
     /* NAV Searchbar and Submit Button */
@@ -62,7 +67,7 @@ nav {
     border-left:none;
     border-right:none;
     padding:0 0 0 10px;
-    width:300px;
+    width:322px;
 }
 
 #dropdownSearchButtons {
@@ -80,6 +85,7 @@ nav {
     font-size: 12px;
     height:30px;
     background-color: #d9d9d9;
+    cursor: pointer;
 }
 
 #brandsDropdownButton {
@@ -95,6 +101,7 @@ nav {
     border: none;
     border-radius: 5% 17% 17% 5%;
     width:90px;
+    cursor: pointer;
 }
 
     /* NAV User Icon Dropdown */
@@ -106,6 +113,7 @@ nav {
 .icon {
     width:30px;
     margin-left:20px;
+    cursor: pointer;
 }
 
     /* MODAL */
@@ -165,9 +173,13 @@ h3{
     
     /* FRONT PAGE MAIN  */
 
+#frontPageMain{
+    margin-bottom:400px;
+}
+
 #frontPageMainGrid{
     display:grid;
-    grid-template-columns: 50%;
+    grid-template-columns: 70% 30%;
 
 }
 
@@ -197,11 +209,35 @@ span {
     grid-column:2/3;
 }
 
+/* .circle{
+    background-color: #618242;
+    height: 500px;
+    width: 500px;
+    border-radius: 100%;
+    filter:blur(100px);
+    position:relative;
+    top:200px;
+    left:250px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerCircle{
+    background-color: #A2B85F;
+    height: 300px;
+    width: 300px;
+    border-radius: 100%;
+    filter:blur(100px); 
+} */
+
+/* LEAF IMAGE */
 #frontPageImage{
     width:550px;
-    margin-right:-100px;
-    position: relative;
-    left:200px;
+    position: fixed;
+    right:0;
+    bottom:0;
+    z-index:-1;
 }
 
 /* BANNER SECTION */
@@ -219,7 +255,7 @@ span {
 }
 
 #bannerLeft{
-    background-color: #25995c;
+    background-color: #618242;
     height:100%;
     width:100%;
     border-radius: 5%;
