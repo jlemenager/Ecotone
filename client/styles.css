@@ -241,3 +241,26 @@ span {
     height:50%;
     margin:0;
 }
+
+
+/* PRODUCT PAGE */
+
+#productGrid{
+    display:grid;
+    grid-template-columns: 33%;
+    text-align: center;
+}
+
+.p1{
+    grid-column:1/2;
+}
+.p2{
+    grid-column:2/3;
+}
+.p3{
+    grid-column:3/4;
+}
+
+.productImage{
+    width:75%;
+}

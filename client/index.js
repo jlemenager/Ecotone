@@ -1,3 +1,9 @@
+//CONSTANTS
+
+const frontPageMain = document.querySelector('#frontPageMain')
+const frontPageBanners = document.querySelector('#frontPageBanners')
+
+
 //MODAL
 
     //Constants
@@ -18,6 +24,7 @@ const closeModal = () => {
 
 document.querySelector('#hamburgerMenu').addEventListener('click', showModal)
 document.querySelector('#modalCloseButton').addEventListener('click', closeModal)
+
 
 //TYPING EFFECT  
     
@@ -77,9 +84,11 @@ let product = document.querySelectorAll('.product')
     //Functions
 
 const displayProducts = async() => {
-    const response = await axios.get('http://localhost:3001/api/products')
-    console.log(response)
-    product.forEach((elem, idx)=>elem.innerHTML = `${response.data.products[idx].mainImage}< /br>${response.data.products[idx].name}< /br>${response.data.products[idx].brand}${response.data.products[idx].price}${response.data.products[idx].size}`)
+        frontPageMain.style.display = 'none'
+        frontPageBanners.style.display = 'none'
+        const response = await axios.get('http://localhost:3001/api/products')
+        console.log(response)
+        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><br>${response.data.products[idx].name}<br>${response.data.products[idx].brand}${response.data.products[idx].price}${response.data.products[idx].size}`)
 }
 
     //Event Listener
