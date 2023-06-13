@@ -5,6 +5,7 @@ const Product = new Schema(
         name: {type:String, required:true},
         category: {type:Schema.Types.ObjectId, ref: 'Category'},
         brand: {type:Schema.Types.ObjectId, ref: 'Brand'},
+        link:{type:String, required:true},
         price: {type:Number, required:true},
         color: {type:String, required:true},
         size: {type:String, required:true},
