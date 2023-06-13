@@ -3,6 +3,7 @@
 const frontPageMain = document.querySelector('#frontPageMain')
 const frontPageBanners = document.querySelector('#frontPageBanners')
 const products = document.querySelector('#products')
+let product = document.querySelectorAll('.product')
 const logo = document.querySelector('#logo')
 
 
@@ -73,17 +74,13 @@ const typingEffect = () => {
 typingEffect()
 
 
-//DISPLAY PRODUCT FUNCTIONS
-
-    //Main Product Search
+//DISPLAY PRODUCT LIST
 
         //Constants
 
 const dropdownOptions = document.querySelectorAll('select')
 const brandDropdownOptions = document.querySelectorAll('.brands')
 const categoryDropdownOptions = document.querySelectorAll('.categories')
-
-let product = document.querySelectorAll('.product')
 
 const allCategoriesOption = document.querySelector('.allCategories')
 const allBrandsOption = document.querySelector('.allBrands')
@@ -128,8 +125,59 @@ const displayAllProducts = async() => {
 
 document.querySelector('#searchButton').addEventListener('click',displayAllProducts)
 
+//DISPLAY PRODUCT LIST
 
+    //Constants
 
+const productPage = document.querySelector('#productPage')
+const productPageImage = document.querySelector('#imageContainerLeft')
+const productPageInfo = document.querySelector('#productPageInfo')
+const brandInfoChart = document.querySelector('.brandInfoChart')
+    
+    //Functions
+    
+    //Event Listeners
+
+product.forEach((elem,idx) =>{
+    elem.addEventListener('click', async()=>{
+        productPage.style.display = 'block'
+        products.style.display = 'none'
+        frontPageMain.style.display = 'none'
+        frontPageBanners.style.display = 'none'
+
+        const productResponse = await axios.get('http://localhost:3001/api/products')
+        const brandResponse = await axios.get('http://localhost:3001/api/brands')
+        const productPageChart = new JSC.Chart('brandInfoChart', {
+            type: 'horizontal column',
+            width:'800px',
+            height:'400px',
+            series: [
+                {
+                    palette: {
+                        stops: [
+                            [0, '#618242'],
+                            [100, '#d9d9d9']
+                        ]
+                    },
+                    points: [
+                        {x:'B Corporation', y:brandResponse.data.brands[0].bCorp},
+                        {x:'Ethically Made', y:brandResponse.data.brands[0].ethicallyMade},
+                        {x:'Donate to Charities', y:brandResponse.data.brands[0].donateToCharities},
+                        {x:'Vegan', y:brandResponse.data.brands[0].vegan},
+                        {x:'Organic', y:brandResponse.data.brands[0].percentOrganic},
+                        {x:'Carbon Neutral', y:brandResponse.data.brands[0].percentOrganic},
+                        {x:'Recycled Materials', y:brandResponse.data.brands[0].recycledMaterialsUsed}
+                    ]
+                }
+            ]
+        })
+        // productPageChart.setAttribute('id','productPageChart')
+
+        productPageImage.innerHTML = `<img id='productPageImage' src='${productResponse.data.products[idx].mainImage}'>`
+        productPageInfo.innerHTML = `<h1 id='productPageName'>${productResponse.data.products[idx].name}</h1><p id='productPageBrand'>${productResponse.data.products[idx].brand.name}</p><p id='productPagePrice'>${productResponse.data.products[idx].price}</p><p id='productPageSize'>${productResponse.data.products[idx].size}</p><p id='productPageDescription'>${productResponse.data.products[idx].description}</p>`
+        brandInfoChart.innerHTML = `<h2>${productResponse.data.products[idx].brand.name}'s Score</h2>${productPageChart}`
+    })
+})
 
 //GO TO HOME PAGE
 
