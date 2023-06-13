@@ -2,7 +2,7 @@ const { Product } = require('../models')
 
 const getAllProducts = async(req,res) => {
     try{
-        const products = await Product.find()
+        const products = await Product.find().populate('category', 'name').populate('brand', 'name')
         return res.status(200).json({ products })
     } catch(e){
         return res.status(500).send(e.message)

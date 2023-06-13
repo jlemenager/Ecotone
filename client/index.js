@@ -75,26 +75,60 @@ typingEffect()
 
 //DISPLAY PRODUCT FUNCTIONS
 
-    //Constants
+    //Main Product Search
+
+        //Constants
 
 const dropdownOptions = document.querySelectorAll('select')
+const brandDropdownOptions = document.querySelectorAll('.brands')
+const categoryDropdownOptions = document.querySelectorAll('.categories')
 
 let product = document.querySelectorAll('.product')
 
-    //Functions
+const allCategoriesOption = document.querySelector('.allCategories')
+const allBrandsOption = document.querySelector('.allBrands')
+        
+        //Functions
 
-const displayProducts = async() => {
+const changeSelectedCategory = () => {
+    document.querySelector('#categoriesDropdownButton').addEventListener('change',(category)=>{
+        allCategoriesOption.removeAttribute('selected')
+        category.target.setAttribute('selected','selected')
+        console.log(category.target.value)
+    })
+}
+
+const changeSelectedBrand = () => {
+    document.querySelector('#brandsDropdownButton').addEventListener('change',(brand)=>{
+        allBrandsOption.removeAttribute('selected')
+        brand.target.setAttribute('selected','selected')
+        console.log(brand.target.value)
+    })
+}
+changeSelectedCategory()
+changeSelectedBrand()
+const displayAllProducts = async() => {
+    if(allCategoriesOption.hasAttribute('selected') && allBrandsOption.hasAttribute('selected')){
         products.style.display = 'block'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         const response = await axios.get('http://localhost:3001/api/products')
         console.log(response)
-        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
+        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
+    } else if (allCategoriesOption.hasAttribute('selected') === false && allBrandsOption.hasAttribute('selected')){
+        console.log('happy days')
+        categoryDropdownOptions.forEach((elem)=>console.log(elem))
+        
+    } else if (allCategoriesOption.hasAttribute('selected') && allBrandsOption.hasAttribute('selected')===false){
+        console.log('happy days brand')
+    }
 }
 
-    //Event Listener
+        //Event Listener
 
-document.querySelector('#searchButton').addEventListener('click',displayProducts)
+document.querySelector('#searchButton').addEventListener('click',displayAllProducts)
+
+
 
 
 //GO TO HOME PAGE
