@@ -448,11 +448,12 @@ h3{
 
 .userDiv{
     margin:0 300px;
-    padding:50px 80px 80px;
+    padding:40px 80px 80px;
 }
 
 .userHeader{
     color:#d9d9d9;
+    font-size:2rem;
 }
 
 .inputLabel{
@@ -461,7 +462,7 @@ h3{
 
 .input{
     margin-top:10px;
-    padding:10px 0;
+    padding:10px 10px;
     border-radius: 10%;
     border: none;
 }
@@ -477,7 +478,7 @@ h3{
     border-radius: 5%;
     border:1px solid white;
     cursor:pointer;
-    width:33%;
+    width:40%;
 }
 
 .userSubmitButton:hover{
@@ -500,7 +501,7 @@ h3{
 }
 
 #createAccountInputs{
-    padding-top:60px;
+    padding-top:50px;
     width:65%;
     text-align: left;
     display: flex;
@@ -524,7 +525,7 @@ h3{
 }
 
 #loginInputs{
-    padding-top:60px;
+    padding-top:50px;
     width:65%;
     text-align: left;
     display: flex;
@@ -556,7 +557,7 @@ h3{
 }
 
 #userInfoInputs{
-    padding-top:60px;
+    padding-top:50px;
     width:65%;
     text-align: left;
     display: flex;
@@ -580,7 +581,7 @@ h3{
 }
 
 #logoutInputs{
-    padding-top:60px;
+    padding-top:50px;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -604,6 +605,10 @@ h3{
     align-items: center;
     background-color: #618242;
     border-radius: 1%;
+}
+
+#deleteAccountHeader{
+    font-size: 1.5rem;
 }
 
 #deleteAccountInputs{

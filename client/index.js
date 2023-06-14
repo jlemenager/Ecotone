@@ -273,7 +273,7 @@ const updateUserInfoPage = document.querySelector('#userInfoPage')
 const logoutPage = document.querySelector('#logoutPage')
 const deleteAccountPage = document.querySelector('#deleteAccountPage')
 
-const userIconWrap = document.querySelector('#userIconWrap')
+const userIcon = document.querySelector('#userIcon')
 
 let shown = false
 
@@ -302,7 +302,7 @@ const createUser = async() => {
         email: emailInput,
         password: passwordInput
     })
-    // userIconWrap.innerHTML = `<div class= "icon loggedIn"  id="userIcon">${usernameInput.charAt(0)}${usernameInput.charAt(1)}</div>`
+    userIcon.setAttribute('src', 'images/loggedInIcon.png')
 }
 
 const displayLoginPage = () =>{
@@ -337,7 +337,7 @@ const updateUserLogin = async() => {
                     loggedIn:true
                 })
                 console.log('logged in')
-                // userIconWrap.innerHTML = `<div class= "icon loggedIn"  id="userIcon">${usernameInput.charAt(0)}${usernameInput.charAt(1)}</div>`
+                userIcon.setAttribute('src', 'images/loggedInIcon.png')
             } else {
                 console.log('Already logged in')
             }
@@ -402,7 +402,7 @@ const updateUserLogout = async() => {
                 loggedIn:false,
             })
             console.log('Logged out')
-            // userIconWrap.innerHTML = `<img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">`
+            userIcon.setAttribute('src', 'images/userIcon.png')
         } else {
             console.log('Didnt log out')
         }
@@ -428,7 +428,7 @@ const deleteAccount = async() => {
         if (elem.loggedIn === true){
             await axios.delete(`http://localhost:3001/api/users/delete/${elem._id}`)
             console.log('Account deleted')
-            // userIconWrap.innerHTML = `<img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">`
+            userIcon.setAttribute('src', 'images/userIcon.png')
         } else {
             console.log('Account not logged in')
         }
