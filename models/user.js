@@ -4,7 +4,8 @@ const User = new Schema(
     {
         username: {type:String, required:true},
         loggedIn: {type:Boolean, required:true},
-        email: {type:String, required:false}
+        email: {type:String, required:false},
+        password: {type:String, required:false}
     },
     {timestamps:true}
 )

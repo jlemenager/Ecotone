@@ -103,7 +103,7 @@ const changeSelectedCategory = () => {
         products.style.display = 'block'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
-        updateUserInfo.style.display = 'none'
+        updateUserInfoPage.style.display = 'none'
         loginPage.style.display = 'none'
         createAccountPage.style.display = 'none'
         frontPageMain.style.display = 'none'
@@ -138,7 +138,7 @@ const changeSelectedBrand = () => {
         products.style.display = 'block'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
-        updateUserInfo.style.display = 'none'
+        updateUserInfoPage.style.display = 'none'
         loginPage.style.display = 'none'
         createAccountPage.style.display = 'none'
         frontPageMain.style.display = 'none'
@@ -174,7 +174,7 @@ const displayAllProducts = async() => {
         createAccountPage.style.display = 'none'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
-        updateUserInfo.style.display = 'none'
+        updateUserInfoPage.style.display = 'none'
         console.log(response)
         product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
     } else  {
@@ -204,7 +204,7 @@ product.forEach((elem,idx) =>{
         productPage.style.display = 'block'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
-        updateUserInfo.style.display = 'none'
+        updateUserInfoPage.style.display = 'none'
         loginPage.style.display = 'none'
         createAccountPage.style.display = 'none'
         products.style.display = 'none'
@@ -265,7 +265,7 @@ logo.addEventListener('click', ()=>location.reload())
 
 const createAccountPage = document.querySelector('#createAccountPage')
 const loginPage = document.querySelector('#loginPage')
-const updateUserInfo = document.querySelector('#userInfoPage')
+const updateUserInfoPage = document.querySelector('#userInfoPage')
 const logoutPage = document.querySelector('#logoutPage')
 const deleteAccountPage = document.querySelector('#deleteAccountPage')
 
@@ -277,7 +277,7 @@ let shown = false
 
 const displayCreateAccountPage = () => {
     createAccountPage.style.display = 'block'
-    updateUserInfo.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     loginPage.style.display = 'none'
@@ -290,17 +290,20 @@ const displayCreateAccountPage = () => {
 const createUser = async() => {
     const usernameInput = document.querySelector('#createUsername').value
     const emailInput = document.querySelector('#createEmail').value
+    const passwordInput = document.querySelector('#createPassword').value
 
     await axios.post('http://localhost:3001/api/users/post', {
         username: usernameInput,
         loggedIn: true,
-        email: emailInput
+        email: emailInput,
+        password: passwordInput
     })
+    userIconWrap.innerHTML = `<div class= "icon loggedIn"  id="userIcon">${usernameInput.charAt(0)}${usernameInput.charAt(1)}</div>`
 }
 
 const displayLoginPage = () =>{
     loginPage.style.display = 'block'
-    updateUserInfo.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     createAccountPage.style.display = 'none'
@@ -310,8 +313,34 @@ const displayLoginPage = () =>{
     frontPageBanners.style.display = 'none'
 }
 
+const updateUserLogin = async() => {
+    const usernameInput = document.querySelector('#createUsername').value
+    const emailInput = document.querySelector('#createEmail').value
+    const passwordInput = document.querySelector('#createPassword').value
+
+    const user = await axios.get(`http://localhost:3001/api/users`)
+
+    for(let i = 0;i<user.length;i++){
+        if(usernameInput === user[i].data.username && emailInput === user[i].data.email && passwordInput === user[i].data.password){
+            if(user[i].data.loggedIn === false){
+                await axios.put(`http://localhost:3001/api/users/put/${user.data.id}`, {
+                    username: usernameInput,
+                    loggedIn:true,
+                    email: emailInput,
+                    password: passwordInput
+                })
+                console.log('logged in')
+                userIconWrap.innerHTML = `<div class= "icon loggedIn"  id="userIcon">${usernameInput.charAt(0)}${usernameInput.charAt(1)}</div>`
+            } else {
+                console.log('Already logged in')
+            }
+        } else {
+            console.log('Not valid login')
+        }
+}}
+
 const displayUserInfoPage = () =>{
-    updateUserInfo.style.display = 'block'
+    updateUserInfoPage.style.display = 'block'
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     loginPage.style.display = 'none'
@@ -322,23 +351,31 @@ const displayUserInfoPage = () =>{
     frontPageBanners.style.display = 'none'
 }
 
-const updateUser = async() => {
+const updateUserInfo = async() => {
     const usernameInput = document.querySelector('#createUsername').value
     const emailInput = document.querySelector('#createEmail').value
+    const passwordInput = document.querySelector('#createPassword').value
 
-    await axios.put('http://localhost:3001/api/users/put', {
-        username: usernameInput,
-        loggedIn:true,
-        email: emailInput
-    })
-    console.log('logged in')
+    const user = await axios.get(`http://localhost:3001/api/users`)
 
-    userIconWrap.innerHTML = `<div class= "icon loggedIn"  id="userIcon">${usernameInput.charAt(0)}${usernameInput.charAt(1)}</div>`
+    for(let i = 0;i<user.length;i++){
+        if(user[i].data.loggedIn === true){
+            await axios.put(`http://localhost:3001/api/users/put/${user.data.id}`, {
+                username: usernameInput,
+                loggedIn:true,
+                email: emailInput,
+                password: passwordInput
+            })
+            console.log('Updated account')
+        } else {
+            console.log('Not logged in')
+        }
+    }
 }
 
 const displayLogoutPage = () =>{
     logoutPage.style.display = 'block'
-    updateUserInfo.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
     deleteAccountPage.style.display = 'none'
     loginPage.style.display = 'none'
     createAccountPage.style.display = 'none'
@@ -351,21 +388,30 @@ const displayLogoutPage = () =>{
 const updateUserLogout = async() => {
     const usernameInput = document.querySelector('#createUsername').value
     const emailInput = document.querySelector('#createEmail').value
+    const passwordInput = document.querySelector('#createPassword').value
+    
+    const user = await axios.get(`http://localhost:3001/api/users`)
 
-    await axios.put('http://localhost:3001/api/users/put', {
-        username: usernameInput,
-        loggedIn:false,
-        email: emailInput
-    })
-    console.log('logged in')
-
-    userIconWrap.innerHTML = `<img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">`
+    for(let i = 0;i<user.length;i++){
+        if(user[i].data.loggedIn === true){
+            await axios.put(`http://localhost:3001/api/users/put/${user.data.id}`, {
+                username: usernameInput,
+                loggedIn:false,
+                email: emailInput,
+                password: passwordInput
+            })
+            console.log('Logged out')
+            userIconWrap.innerHTML = `<img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">`
+        } else {
+            console.log('Didnt log out')
+        }
+    }
 }
 
 const displayDeleteAccountPage = () =>{
     deleteAccountPage.style.display = 'block'
     logoutPage.style.display = 'none'
-    updateUserInfo.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
     loginPage.style.display = 'none'
     createAccountPage.style.display = 'none'
     productPage.style.display = 'none'
@@ -379,6 +425,8 @@ const deleteAccount = async() => {
     users.forEach(async(elem, idx)=>{
         if (elem.data.loggedIn === true){
             await axios.delete(`http://localhost:3001/api/users/${idx}`)
+            console.log('Account deleted')
+            userIconWrap.innerHTML = `<img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">`
         } else {
             console.log('Account not logged in')
         }
@@ -411,7 +459,7 @@ document.querySelector('#submitCreateButton').addEventListener('click', ()=>{
     document.querySelector('#createPassword').value = ''
 })
 
-document.querySelector('#submitLoginButton').addEventListener('click', updateUser)
-document.querySelector('#submitUserInfoButton').addEventListener('click', updateUser)
+document.querySelector('#submitLoginButton').addEventListener('click', updateUserLogin)
+document.querySelector('#submitUserInfoButton').addEventListener('click', updateUserInfo)
 document.querySelector('#submitLogoutButton').addEventListener('click', updateUserLogout)
 document.querySelector('#submitDeleteAccountButton').addEventListener('click', deleteAccount)

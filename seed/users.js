@@ -6,7 +6,8 @@ const createUsers = async() => {
         {
             username: 'Jeremy',
             loggedIn: false,
-            email:'jlemenager321@gmail.com'
+            email:'jlemenager321@gmail.com',
+            password:'1234'
         }
     ]
     await User.insertMany(users)
