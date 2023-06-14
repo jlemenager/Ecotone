@@ -99,8 +99,13 @@ const changeSelectedCategory = () => {
         // category.target.setAttribute('selected','selected')
         console.log(category.target.value)
         const response = await axios.get('http://localhost:3001/api/products')
-        products.style.display = 'block'
         document.querySelector('#productGrid').style.display = 'grid'
+        products.style.display = 'block'
+        deleteAccountPage.style.display = 'none'
+        logoutPage.style.display = 'none'
+        updateUserInfo.style.display = 'none'
+        loginPage.style.display = 'none'
+        createAccountPage.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=>{
@@ -129,8 +134,13 @@ const changeSelectedBrand = () => {
         // brand.target.setAttribute('selected','selected')
         console.log(brand.target.value)
         const response = await axios.get('http://localhost:3001/api/products')
-        products.style.display = 'block'
         document.querySelector('#productGrid').style.display = 'grid'
+        products.style.display = 'block'
+        deleteAccountPage.style.display = 'none'
+        logoutPage.style.display = 'none'
+        updateUserInfo.style.display = 'none'
+        loginPage.style.display = 'none'
+        createAccountPage.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=> {
@@ -160,6 +170,11 @@ const displayAllProducts = async() => {
         products.style.display = 'block'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
+        loginPage.style.display = 'none'
+        createAccountPage.style.display = 'none'
+        deleteAccountPage.style.display = 'none'
+        logoutPage.style.display = 'none'
+        updateUserInfo.style.display = 'none'
         console.log(response)
         product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
     } else  {
@@ -171,7 +186,7 @@ const displayAllProducts = async() => {
 
 document.querySelector('#searchButton').addEventListener('click',displayAllProducts)
 
-//DISPLAY PRODUCT LIST
+//DISPLAY PRODUCT PAGE
 
     //Constants
 
@@ -187,6 +202,11 @@ const brandInfoChart = document.querySelector('.brandInfoChart')
 product.forEach((elem,idx) =>{
     elem.addEventListener('click', async()=>{
         productPage.style.display = 'block'
+        deleteAccountPage.style.display = 'none'
+        logoutPage.style.display = 'none'
+        updateUserInfo.style.display = 'none'
+        loginPage.style.display = 'none'
+        createAccountPage.style.display = 'none'
         products.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
@@ -239,11 +259,17 @@ product.forEach((elem,idx) =>{
 
 logo.addEventListener('click', ()=>location.reload())
 
-//GO TO USER LOGIN
+//CRUD USER 
 
     //Constants
 
 const createAccountPage = document.querySelector('#createAccountPage')
+const loginPage = document.querySelector('#loginPage')
+const updateUserInfo = document.querySelector('#userInfoPage')
+const logoutPage = document.querySelector('#logoutPage')
+const deleteAccountPage = document.querySelector('#deleteAccountPage')
+
+const userIconWrap = document.querySelector('#userIconWrap')
 
 let shown = false
 
@@ -251,10 +277,112 @@ let shown = false
 
 const displayCreateAccountPage = () => {
     createAccountPage.style.display = 'block'
+    updateUserInfo.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    loginPage.style.display = 'none'
     productPage.style.display = 'none'
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
+}
+
+const createUser = async() => {
+    const usernameInput = document.querySelector('#createUsername').value
+    const emailInput = document.querySelector('#createEmail').value
+
+    await axios.post('http://localhost:3001/api/users/post', {
+        username: usernameInput,
+        loggedIn: true,
+        email: emailInput
+    })
+}
+
+const displayLoginPage = () =>{
+    loginPage.style.display = 'block'
+    updateUserInfo.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    productPage.style.display = 'none'
+    products.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+const displayUserInfoPage = () =>{
+    updateUserInfo.style.display = 'block'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    productPage.style.display = 'none'
+    products.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+const updateUser = async() => {
+    const usernameInput = document.querySelector('#createUsername').value
+    const emailInput = document.querySelector('#createEmail').value
+
+    await axios.put('http://localhost:3001/api/users/put', {
+        username: usernameInput,
+        loggedIn:true,
+        email: emailInput
+    })
+    console.log('logged in')
+
+    userIconWrap.innerHTML = `<div class= "icon loggedIn"  id="userIcon">${usernameInput.charAt(0)}${usernameInput.charAt(1)}</div>`
+}
+
+const displayLogoutPage = () =>{
+    logoutPage.style.display = 'block'
+    updateUserInfo.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    productPage.style.display = 'none'
+    products.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+const updateUserLogout = async() => {
+    const usernameInput = document.querySelector('#createUsername').value
+    const emailInput = document.querySelector('#createEmail').value
+
+    await axios.put('http://localhost:3001/api/users/put', {
+        username: usernameInput,
+        loggedIn:false,
+        email: emailInput
+    })
+    console.log('logged in')
+
+    userIconWrap.innerHTML = `<img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">`
+}
+
+const displayDeleteAccountPage = () =>{
+    deleteAccountPage.style.display = 'block'
+    logoutPage.style.display = 'none'
+    updateUserInfo.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    productPage.style.display = 'none'
+    products.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+const deleteAccount = async() => {
+    const users = await axios.get('http://localhost:3001/api/users')
+    users.forEach(async(elem, idx)=>{
+        if (elem.data.loggedIn === true){
+            await axios.delete(`http://localhost:3001/api/users/${idx}`)
+        } else {
+            console.log('Account not logged in')
+        }
+    })
 }
 
     // Event Listeners
@@ -270,3 +398,20 @@ document.querySelector('#userIcon').addEventListener('click', ()=>{
 })
 
 document.querySelector('.createAccountOption').addEventListener('click', displayCreateAccountPage)
+document.querySelector('.loginOption').addEventListener('click', displayLoginPage)
+document.querySelector('.updateUserInfoOption').addEventListener('click', displayUserInfoPage)
+document.querySelector('.logoutOption').addEventListener('click', displayLogoutPage)
+document.querySelector('.deleteAccountOption').addEventListener('click', displayDeleteAccountPage)
+
+
+document.querySelector('#submitCreateButton').addEventListener('click', ()=>{
+    createUser()
+    document.querySelector('#createUsername').value = ''
+    document.querySelector('#createEmail').value = ''
+    document.querySelector('#createPassword').value = ''
+})
+
+document.querySelector('#submitLoginButton').addEventListener('click', updateUser)
+document.querySelector('#submitUserInfoButton').addEventListener('click', updateUser)
+document.querySelector('#submitLogoutButton').addEventListener('click', updateUserLogout)
+document.querySelector('#submitDeleteAccountButton').addEventListener('click', deleteAccount)

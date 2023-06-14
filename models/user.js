@@ -2,11 +2,9 @@ const { Schema } = require('mongoose')
 
 const User = new Schema(
     {
-        name: {type:String, required:true},
-        location: {type:String, required:false},
-        amountDonatedToTrees: {type:Number, required:true},
-        amountDonatedToRF: {type:Number, required:true},
-        amountDonatedToMC: {type:Number, required:true}
+        username: {type:String, required:true},
+        loggedIn: {type:Boolean, required:true},
+        email: {type:String, required:false}
     },
     {timestamps:true}
 )
