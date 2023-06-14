@@ -106,14 +106,39 @@ nav {
 
     /* NAV User Icon Dropdown */
 
+
 #userIconDiv {
-    margin:10px 0 0 0
+    margin:10px 0 0 0;
+    display:flex;
+    align-items: center;
 }
 
 .icon {
     width:30px;
     margin-left:20px;
     cursor: pointer;
+    position: relative;
+}
+
+#userDropdownContent{
+    padding:10px;
+    display:none;
+    background-color: #618242;
+    border:1px solid #d9d9d9;
+    position: absolute;
+    right:0;
+    top:80px;
+}
+
+.userOption{
+    background-color: #618242;
+    color:#d9d9d9;
+    border:none;
+    display: block;
+}
+
+.userOption:hover{
+    color: white;
 }
 
     /* MODAL */
@@ -292,11 +317,11 @@ h3{
 
 #productGrid{
     display:grid;
-    grid-template-columns: 33%;
+    grid-template-columns: 33% 33% 33%;
     text-align: center;
 }
 
-.p1{
+/* .p1{
     grid-column:1/2;
 }
 .p2{
@@ -304,9 +329,9 @@ h3{
 }
 .p3{
     grid-column:3/4;
-}
+} */
 
-.product{
+.productStyle{
     margin:40px 40px;
     padding-bottom:70px;
     border:2px solid #d9d9d9;
@@ -326,7 +351,7 @@ h3{
 
 .productInfo{
     text-align: right;
-    margin:0 20px 0 0;
+    margin-right:20px;
     color:#d9d9d9;
 }
 
@@ -339,11 +364,12 @@ h3{
 
 .productPrice{
     position:absolute;
-    left:0;
-    text-align:left;
+    left:10px;
+    top:276px;
+    text-align:center;
     background-color:#618242;
-    width:15%;
-    border-radius: 5%;
+    width:12%;
+    border-radius: 30%;
     font-size: 1.3rem;
     font-weight: 800;
     margin:0;
@@ -377,12 +403,59 @@ h3{
 }
 #productPageInfo{
     background-color: #618242;
-    height:50%;
+    height:80%;
     margin:0 0 0 50px;
     padding:40px;
     border-radius: 5%;
 }
 
+#purchaseDescriptions{
+    display:flex;
+    justify-content: center;
+}
+
+#purchaseHeader{
+    color:white;
+}
+
+.purchaseDescription{
+    height:100px;
+    width:100px;
+    border-radius: 100%;
+    background-color: white;
+    margin: 0 40px;
+    position: relative;
+    bottom:150px;
+    left:25px;
+    text-align: center;
+}
+
 .brandInfoChart{
     margin-top:100px;
+}
+
+/* Create Account */
+
+#createAccountPage{
+    display: none;
+}
+
+#createAccountDiv {
+    padding-top:100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #618242;
+    padding:30px 80px 200px;
+    border-radius: 1%;
+}
+
+#createAccountInputs{
+    padding-top:100px;
+    width:33%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

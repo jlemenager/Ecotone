@@ -25,27 +25,33 @@
             <input id="searchBar" type="text" value="" placeholder="Search for your favorite products here...">
             <div id="dropdownSearchButtons">
             <select class="dropdownSearchButton" id="categoriesDropdownButton">
-                <option class='allCategories' value="All Categories" selected>All Categories</option>
-                <option class='tShirts' value="T-Shirts">T-Shirts</option>
-                <option class='longsleeves' value="Longsleeves">Longsleeves</option>
-                <option class='jackets' value="Jackets">Jackets</option>
-                <option class='hoodies' value="Hoodies">Hoodies</option>
-                <option class='sweaters' value="Sweaters">Sweaters</option>
-                <option class='dresses' value="Dresses">Dresses</option>
+                <option class='allCategories categories' value="All Categories" selected>All Categories</option>
+                <option class='tShirts categories' value="T-Shirts">T-Shirts</option>
+                <option class='longsleeves categories' value="Longsleeves">Longsleeves</option>
+                <option class='jackets categories' value="Jackets">Jackets</option>
+                <option class='hoodies categories' value="Hoodies">Hoodies</option>
+                <option class='sweaters categories' value="Sweaters">Sweaters</option>
+                <option class='dresses categories' value="Dresses">Dresses</option>
             </select>
             <select class="dropdownSearchButton" id="brandsDropdownButton">
-                <option class='allBrands' value="All Brands" selected>All Brands</option>
-                <option class='heApparel' value="HE Apparel">HE Apparel</option>
-                <option class='mpgSport' value="MPG Sport">MPG Sport</option>
+                <option class='allBrands brands' value="All Brands" selected>All Brands</option>
+                <option class='heApparel brands' value="Happy Earth Apparel">HE Apparel</option>
+                <option class='mpgSport brands' value="MPG Sport">MPG Sport</option>
             </select>
             </div>
             <button id="searchButton">Search</button>
         </div>
         <div id="userIconDiv">
+            
             <img class= "icon" id="brandDropDown" src="images/brandDropDown.png" alt="userIcon">
             <img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">
         </div>
     </nav>
+    <div id="userDropdownContent">
+        <button class="userOption createAccountOption">Create Account</button>
+        <button class="userOption loginOption">Login</button>
+        <button class="userOption logoutOption">Logout</button>
+    </div>
 </header>
     <div id="modal">
         <div id="modalTextbox">
@@ -91,18 +97,18 @@
     </section>
     <section id="products">
         <div id="productGrid">
-        <div class='product p1'></div>
-        <div class='product p2'></div>
-        <div class='product p3'></div>
-        <div class='product p1'></div>
-        <div class='product p2'></div>
-        <div class='product p3'></div>
-        <div class='product p1'></div>
-        <div class='product p2'></div>
-        <div class='product p3'></div>
-        <div class='product p1'></div>
-        <div class='product p2'></div>
-        <div class='product p3'></div>
+        <div class="p1 product"></div>
+        <div class="p2 product"></div>
+        <div class="p3 product"></div>
+        <div class="p1 product"></div>
+        <div class="p2 product"></div>
+        <div class="p3 product"></div>
+        <div class="p1 product"></div>
+        <div class="p2 product"></div>
+        <div class="p3 product"></div>
+        <div class="p1 product"></div>
+        <div class="p2 product"></div>
+        <div class="p3 product"></div>
         </div>
     </section>
     <section id="productPage">
@@ -112,9 +118,25 @@
             <div id="detailsContainerRight">
             <div id="productPageInfo">
             </div>
+            <!-- <div id="purchaseDescriptions">
+            <div class="purchaseDescription">asdfsdf</div>
+            <div class="purchaseDescription">asdfsdf</div>
+            <div class="purchaseDescription">fsda</div>
+            </div> -->
             </div>
         </div>
         <div class="brandInfoChart">
+        </div>
+    </section>
+    <section id="createAccountPage">
+        <div id="createAccountDiv">
+            <h1>Create Your New Ecotone Account!</h1>
+            <div id="createAccountInputs">
+            <span id="usernamePreValue">Username:</span><input id="createUsername" type="text"><br>
+            <span id="emailPreValue">Email:</span><input id="createEmail" type="text"><br>
+            <span id="passwordPreValue">Password:</span><input id="createPassword" type="text"><br>
+            <button id="submitCreateButton">Submit</button>
+            </div>
         </div>
     </section>
 <script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>

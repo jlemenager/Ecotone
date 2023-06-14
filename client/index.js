@@ -78,46 +78,92 @@ typingEffect()
 
         //Constants
 
-const dropdownOptions = document.querySelectorAll('select')
+// const dropdownOptions = document.querySelectorAll('select')
 const brandDropdownOptions = document.querySelectorAll('.brands')
 const categoryDropdownOptions = document.querySelectorAll('.categories')
 
 const allCategoriesOption = document.querySelector('.allCategories')
 const allBrandsOption = document.querySelector('.allBrands')
+
+let changedCategorytoAll = false
+let changedBrandtoAll = false
+let changedDropdown = false
         
         //Functions
 
 const changeSelectedCategory = () => {
-    document.querySelector('#categoriesDropdownButton').addEventListener('change',(category)=>{
-        allCategoriesOption.removeAttribute('selected')
-        category.target.setAttribute('selected','selected')
+    document.querySelector('#categoriesDropdownButton').addEventListener('change', async(category)=>{
+        changedDropdown = true
+        changedCategorytoAll = false
+        // allCategoriesOption.removeAttribute('selected')
+        // category.target.setAttribute('selected','selected')
         console.log(category.target.value)
+        const response = await axios.get('http://localhost:3001/api/products')
+        products.style.display = 'block'
+        document.querySelector('#productGrid').style.display = 'grid'
+        frontPageMain.style.display = 'none'
+        frontPageBanners.style.display = 'none'
+        product.forEach((elem, idx)=>{
+        elem.classList.remove('productStyle')
+        elem.innerHTML = ''
+        if(category.target.value === response.data.products[idx].category.name){
+        elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+        elem.setAttribute('class','productStyle')
+        } else {
+            console.log(`Not a ${response.data.products[idx].category.name}`)
+            if (category.target.value === 'All Categories'){
+                changedCategorytoAll = true
+            } else {
+                console.log('Not All Categories')
+            }
+        }
+    })
     })
 }
 
 const changeSelectedBrand = () => {
-    document.querySelector('#brandsDropdownButton').addEventListener('change',(brand)=>{
-        allBrandsOption.removeAttribute('selected')
-        brand.target.setAttribute('selected','selected')
+    document.querySelector('#brandsDropdownButton').addEventListener('change',async(brand)=>{
+        changedDropdown = true
+        changedBrandtoAll = false
+        // allBrandsOption.removeAttribute('selected')
+        // brand.target.setAttribute('selected','selected')
         console.log(brand.target.value)
+        const response = await axios.get('http://localhost:3001/api/products')
+        products.style.display = 'block'
+        document.querySelector('#productGrid').style.display = 'grid'
+        frontPageMain.style.display = 'none'
+        frontPageBanners.style.display = 'none'
+        product.forEach((elem, idx)=> {
+        elem.classList.remove('productStyle')
+        elem.innerHTML = ''
+        if(brand.target.value === response.data.products[idx].brand.name){
+            elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+            elem.setAttribute('class','productStyle product')
+        } else {
+            console.log(`Not from ${response.data.products[idx].brand.name}`)
+            if (brand.target.value === 'All Brands'){
+                changedBrandtoAll = true
+            } else {
+                console.log('Not All Brands')
+            }
+        }
+    })
     })
 }
 changeSelectedCategory()
 changeSelectedBrand()
 const displayAllProducts = async() => {
-    if(allCategoriesOption.hasAttribute('selected') && allBrandsOption.hasAttribute('selected')){
+    const response = await axios.get('http://localhost:3001/api/products')
+    document.querySelector('#brandsDropdownButton').addEventListener('change',(brand)=>{
+    })
+    if((changedCategorytoAll === true && changedBrandtoAll === true) || changedDropdown === false){
         products.style.display = 'block'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
-        const response = await axios.get('http://localhost:3001/api/products')
         console.log(response)
         product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
-    } else if (allCategoriesOption.hasAttribute('selected') === false && allBrandsOption.hasAttribute('selected')){
+    } else  {
         console.log('happy days')
-        categoryDropdownOptions.forEach((elem)=>console.log(elem))
-        
-    } else if (allCategoriesOption.hasAttribute('selected') && allBrandsOption.hasAttribute('selected')===false){
-        console.log('happy days brand')
     }
 }
 
@@ -160,13 +206,13 @@ product.forEach((elem,idx) =>{
                         ]
                     },
                     points: [
-                        {x:'B Corporation', y:brandResponse.data.brands[0].bCorp},
-                        {x:'Ethically Made', y:brandResponse.data.brands[0].ethicallyMade},
-                        {x:'Donate to Charities', y:brandResponse.data.brands[0].donateToCharities},
-                        {x:'Vegan', y:brandResponse.data.brands[0].vegan},
-                        {x:'Organic', y:brandResponse.data.brands[0].percentOrganic},
-                        {x:'Carbon Neutral', y:brandResponse.data.brands[0].percentOrganic},
-                        {x:'Recycled Materials', y:brandResponse.data.brands[0].recycledMaterialsUsed}
+                        {x:'B Corporation', y:productResponse.data.products[idx].brand.bCorp},
+                        {x:'Ethically Made', y:productResponse.data.products[idx].brand.ethicallyMade},
+                        {x:'Donate to Charities', y:productResponse.data.products[idx].brand.donateToCharities},
+                        {x:'Vegan', y:productResponse.data.products[idx].brand.vegan},
+                        {x:'Organic', y:productResponse.data.products[idx].brand.percentOrganic},
+                        {x:'Carbon Neutral', y:productResponse.data.products[idx].brand.percentOrganic},
+                        {x:'Recycled Materials', y:productResponse.data.products[idx].brand.recycledMaterialsUsed}
                     ]
                 }
             ]
@@ -192,3 +238,35 @@ product.forEach((elem,idx) =>{
     //Event Listeners
 
 logo.addEventListener('click', ()=>location.reload())
+
+//GO TO USER LOGIN
+
+    //Constants
+
+const createAccountPage = document.querySelector('#createAccountPage')
+
+let shown = false
+
+    //Functions
+
+const displayCreateAccountPage = () => {
+    createAccountPage.style.display = 'block'
+    productPage.style.display = 'none'
+    products.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+    // Event Listeners
+
+document.querySelector('#userIcon').addEventListener('click', ()=>{
+    if(shown === false){
+        document.querySelector(`#userDropdownContent`).style.display = 'block'
+        shown = true
+    } else {
+        document.querySelector(`#userDropdownContent`).style.display = 'none'
+        shown = false
+    }
+})
+
+document.querySelector('.createAccountOption').addEventListener('click', displayCreateAccountPage)
