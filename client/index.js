@@ -10,24 +10,73 @@ const logo = document.querySelector('#logo')
 //MODAL
 
     //Constants
-
 const modal = document.querySelector('#modal')
+let modalButtonCategory = document.querySelectorAll('.modalCategory')
+let modalButtonBrand = document.querySelectorAll('.modalBrand')
 
-    //Functions
-
+    // Functions
 const showModal = () => {
-    modal.style.display = 'block'
-}
-
+        modal.style.display = 'block'
+    }
+    
 const closeModal = () => {
+        modal.style.display = 'none'
+    }
+    
+const displayCategoriesFromModal = async(category) => {
+    products.style.display = 'block'
     modal.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+    const response = await axios.get('http://localhost:3001/api/products')
+    product.forEach((elem, idx)=> {
+        console.log('forEach working')
+        elem.classList.remove('productStyle')
+        elem.innerHTML = ''
+        if(category.target.innerHTML === response.data.products[idx].category.name){
+            console.log('categories match')
+            elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+            elem.setAttribute('class','productStyle product')
+        } else {
+            console.log(`Not a ${response.data.products[idx].category.name}`)
+        }
+})
 }
 
-    //Event Listeners
+const displayBrandsFromModal = async(brand) => {
+    products.style.display = 'block'
+    modal.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+    const response = await axios.get('http://localhost:3001/api/products')
+    product.forEach((elem, idx)=> {
+        elem.classList.remove('productStyle')
+        elem.innerHTML = ''
+        if(brand.target.innerHTML === response.data.products[idx].brand.name){
+            elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+            elem.setAttribute('class','productStyle product')
+        } else {
+            console.log(`Not from ${response.data.products[idx].brand.name}`)
+        }
+})
+}
+
+    // Event Listeners
 
 document.querySelector('#hamburgerMenu').addEventListener('click', ()=>setTimeout(showModal,50))
 document.querySelector('#modalCloseButton').addEventListener('click', ()=>setTimeout(closeModal,50))
-
+modalButtonCategory.forEach((elem)=>{elem.addEventListener('click', displayCategoriesFromModal)})
+modalButtonBrand.forEach((elem)=>{elem.addEventListener('click', displayBrandsFromModal)})
 
 //TYPING EFFECT  
     
