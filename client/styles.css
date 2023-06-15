@@ -417,15 +417,33 @@ h3{
 }
 #productPageInfo{
     background-color: #618242;
+    color:#d9d9d9;
     height:80%;
     margin:0 0 0 50px;
     padding:40px;
     border-radius: 5%;
+    position: relative;
+}
+
+#productPagePrice{
+    position: absolute;
+    right:40px;
+    top:14px;
+    background-color: #d9d9d9;
+    color: #618242;
+    padding:20px 25px;
+    border-radius: 20%;
+    font-size: 1.6rem;
+    font-weight: 700;
+
 }
 
 #productPageBuyButton{
     background-color: #618242;
     color:white;
+    border:1px solid #d9d9d9;
+    padding:10px 15px;
+    border-radius: 14%;
 }
 
 #productPageBuyButton:hover{

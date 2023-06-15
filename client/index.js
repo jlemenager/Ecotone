@@ -16,12 +16,19 @@ const categoryDropdownOptions = document.querySelectorAll('.categories')
 const allCategoriesOption = document.querySelector('.allCategories')
 const allBrandsOption = document.querySelector('.allBrands')
 
-let changedCategorytoAll = true
-let changedBrandtoAll = true
+
+let changedCategorytoAll = false
+let changedBrandtoAll = false
 let changedDropdown = false
 
 let categories = []
 let brands = []
+if (categories.length === 0){
+    changedCategorytoAll = true
+}
+if (brands.length === 0){
+    changedBrandtoAll = true
+}
 
     //Display Product Page Constants
 
@@ -153,16 +160,13 @@ typingEffect()
         //Functions
 
 const changeSelectedCategory = async(category) => {
+        console.log(changedCategorytoAll)
+        console.log(changedBrandtoAll)
+        console.log(category.target.value)
         categories.push(category.target.value)
         if (categories.length > 1){
-            categories.pop()
+            categories.shift()
         }
-        // if (category.target.value === 'All Categories'){
-        //     changedCategorytoAll = true
-        // }
-        // allCategoriesOption.removeAttribute('selected')
-        // category.target.setAttribute('selected','selected')
-        console.log(category.target.value)
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
@@ -178,13 +182,14 @@ const changeSelectedCategory = async(category) => {
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=>{
         if(changedBrandtoAll === true){
+            changedCategorytoAll = false
             if(category.target.value === response.data.products[idx].category.name){
                 elem.style.display = 'block'
                 elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
                 console.log('chose cat no brand')
-                changedCategorytoAll = false
+                console.log(category.target.value)
                 } else {
-                    console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
+                    // console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
                     elem.style.display = 'none'
                     elem.innerHTML = ''
                 }
@@ -193,9 +198,9 @@ const changeSelectedCategory = async(category) => {
                 elem.style.display = 'block'
                 elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
                 console.log('chose cat with brand')
-                changedBrandtoAll = false
+                console.log(brands[0])
                 } else {
-                    console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
+                    console.log(`Not selected because its a ${response.data.products[idx].category.name} and from ${response.data.products[idx].brand.name}`)
                     elem.style.display = 'none'
                     elem.innerHTML = ''
                 }
@@ -205,16 +210,13 @@ const changeSelectedCategory = async(category) => {
     }
     
 const changeSelectedBrand = async(brand) => {
+        console.log(changedCategorytoAll)
+        console.log(changedBrandtoAll)
+        console.log(brand.target.value)
         brands.push(brand.target.value)
         if (brands.length > 1){
-            brands.pop()
+            brands.shift()
         }
-        // if (brand.target.value === 'All Brands'){
-        //     changedBrandtoAll = true
-        // }
-        // allBrandsOption.removeAttribute('selected')
-        // brand.target.setAttribute('selected','selected')
-        console.log(brands)
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
@@ -229,23 +231,25 @@ const changeSelectedBrand = async(brand) => {
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=> {
         if (changedCategorytoAll === true) {
+            changedBrandtoAll = false
             if(brand.target.value === response.data.products[idx].brand.name){
                 elem.style.display = 'block'
                 elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
                 console.log('chose brand no cat')
-                changedBrandtoAll = false
+                console.log(brand.target.value)
             } else {
                 console.log(`Not from ${response.data.products[idx].brand.name} or a ${response.data.products[idx].category.name}`)
                 elem.style.display = 'none'
                 elem.innerHTML = ''
             }
         } else {
+            changedBrandtoAll = false
             if(brand.target.value === response.data.products[idx].brand.name && categories[0] === response.data.products[idx].category.name){
                 elem.style.display = 'block'
                 elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
                 console.log('chose brand with cat')
             } else {
-                console.log(`Not from ${response.data.products[idx].brand.name} or a ${response.data.products[idx].category.name}`)
+                console.log(`Not selected because its from ${response.data.products[idx].brand.name} and a ${response.data.products[idx].category.name}`)
                 elem.style.display = 'none'
                 elem.innerHTML = ''
             }
@@ -275,11 +279,11 @@ const reset = () => {
 }
 
 const showSearch = async() => {
-    let search = searchBar.value
+let search = searchBar.value
 
-    const response = await axios.get('http://localhost:3001/api/products')
+const response = await axios.get('http://localhost:3001/api/products')
 
-let searchBarColorMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black|brown|tan)/gi)
+let searchBarColorMatches = search.match(/([Bb]lue?|[Gg]reen?|(R|r)ed?|(P|p)urple?|(P|p)ink?|(Y|y)ellow?|(B|b)lack?|(B|b)rown?|(T|t)an?)/gi)
 let searchBarCategoryMatches = search.match(/(t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?)/gi)
   if (searchBarColorMatches.length>0 || searchBarCategoryMatches.length>0){
     console.log(searchBarColorMatches)
@@ -295,8 +299,8 @@ let searchBarCategoryMatches = search.match(/(t-shirts?|longsleeves?|sweaters?|s
             let category = response.data.products[i].category.name
             console.log(category)
             if(color.includes(elem) || category.includes(elem)){
-                document.querySelectorAll('.product')[0].style.display = 'block'
-                document.querySelectorAll('.product')[0].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
+                document.querySelectorAll('.product')[i].style.display = 'block'
+                document.querySelectorAll('.product')[i].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
                 console.log('working')
             } else {
                 console.log("didn't match")
@@ -322,9 +326,11 @@ const affiliateLink = async() => {
     //Event Listeners
 
 product.forEach(async(elem,idx) =>{
-    const productResponse = await axios.get('http://localhost:3001/api/products')
+    
     elem.addEventListener('click', async()=>{
+        const productResponse = await axios.get('http://localhost:3001/api/products')
         console.log('clicked')
+        // const productResponse = await axios.get('http://localhost:3001/api/products')
         productPage.style.display = 'block'
         brandInfoChart.style.display = 'block'
         deleteAccountPage.style.display = 'none'
