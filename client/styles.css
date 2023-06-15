@@ -70,6 +70,11 @@ nav {
     width:322px;
 }
 
+#searchBar:focus{
+    outline:none;
+}
+/* https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome */
+
 #dropdownSearchButtons {
     display: flex;
     justify-content: center;
@@ -425,6 +430,10 @@ h3{
     position: relative;
 }
 
+#productPageName{
+    width:80%;
+}
+
 #productPagePrice{
     position: absolute;
     right:40px;
@@ -449,6 +458,7 @@ h3{
 #productPageBuyButton:hover{
     background-color: #d9d9d9;
     color:#618242;
+    cursor: pointer;
 }
 
 #purchaseDescriptions{
@@ -653,4 +663,37 @@ h3{
 
 #submitDeleteAccountButton{
     width:100%;
+}
+
+/* FOOTER */
+
+footer{
+    background-color: #618242;
+    color:#d9d9d9;
+    text-align: center;
+    margin-top:200px;
+    padding:10px 207px 10px;
+    border-radius: 1%;
+}
+
+#footerFlexBox{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#footerLogo{
+    height:40px;
+}
+
+#footerContactInfo{
+    text-align: center;
+}
+
+#contactUsFooter{
+    margin-bottom:10px;
+}
+
+footer h6{
+    margin:0;
 }

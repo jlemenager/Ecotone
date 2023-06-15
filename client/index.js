@@ -278,7 +278,7 @@ const reset = () => {
     frontPageBanners.style.display = 'none'
 }
 
-const showSearch = async() => {
+const showColorSearch = async() => {
 let search = searchBar.value
 
 const response = await axios.get('http://localhost:3001/api/products')
@@ -309,6 +309,58 @@ let searchBarCategoryMatches = search.match(/(t-shirts?|longsleeves?|sweaters?|s
     })
 }
 }
+
+const showSearch = async() => {
+    let search = searchBar.value
+    let searchList = []
+    const response = await axios.get('http://localhost:3001/api/products')
+    
+    let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
+      if (searchBarMatches.length>0){
+        console.log(searchBarMatches)
+        reset()
+        //https://blog.gitnux.com/code/javascript-append-array/#:~:text=In%20JavaScript%2C%20you%20can%20append,using%20the%20Array%20Spread%20Operator.&text=Both%20of%20these%20methods%20will,without%20modifying%20the%20original%20arrays.
+        console.log(response.data)
+            for(let i = 0;i<response.data.products.length;i++){
+                let category = response.data.products[i].category.name
+                let color = response.data.products[i].color
+                let gender = response.data.products[i].category.gender
+                let categorySearch = searchBarMatches.filter(word => category.includes(word))
+                let colorSearch = searchBarMatches.filter(word => color.includes(word))
+                let genderSearch = searchBarMatches.filter(word => gender.includes(word))
+                if(categorySearch.includes(response.data.products[i].category.name) && colorSearch.includes(response.data.products[i].color) && genderSearch.includes(response.data.products[i].category.gender)){
+                    searchList.push(`A${i}`)
+                    // document.querySelectorAll('.product')[i].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
+                    // document.querySelectorAll('.product')[i].style.display = 'block'
+                    // console.log('working')
+                } else if(categorySearch.includes(response.data.products[i].category.name) && genderSearch.includes(response.data.products[i].category.gender)){
+                    searchList.push(`B${i}`)
+                } else if(categorySearch.includes(response.data.products[i].category.name) && colorSearch.includes(response.data.products[i].color)){
+                    searchList.push(`C${i}`)
+                } else if(colorSearch.includes(response.data.products[i].color) && genderSearch.includes(response.data.products[i].category.gender)){
+                    searchList.push(`D${i}`)
+                } else if(categorySearch.includes(response.data.products[i].category.name) || colorSearch.includes(response.data.products[i].color) || genderSearch.includes(response.data.products[i].category.gender)){
+                    searchList.push(`E${i}`)
+                }
+            }
+            searchList.sort()
+            searchList.forEach((elem, idx)=>{
+                console.log(elem)
+                elem.slice(0,1)
+            })
+        
+            console.log(searchList)
+                //https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/
+                document.querySelectorAll('.product')[elem].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
+                document.querySelectorAll('.product')[elem].style.display = 'block'
+                console.log('working')
+      }
+    }
+
+    const searchFilter = () => {
+        showColorSearch()
+        showCategorySearch()
+    }
 
         //Event Listener
 
@@ -369,7 +421,7 @@ product.forEach(async(elem,idx) =>{
         // productPageChart.setAttribute('id','productPageChart')
 
         productPageImage.innerHTML = `<img id='productPageImage' src='${productResponse.data.products[idx].mainImage}'>`
-        productPageInfo.innerHTML = `<h1 id='productPageName'>${productResponse.data.products[idx].name}</h1><p id='productPageBrand'>${productResponse.data.products[idx].brand.name}</p><p id='productPagePrice'>$${productResponse.data.products[idx].price}</p><button id='productPageBuyButton' onclick='affiliateLink'>Buy Now</button><p id='productPageSize'>${productResponse.data.products[idx].size}</p><p id='productPageDescription'>${productResponse.data.products[idx].description}</p>`
+        productPageInfo.innerHTML = `<h1 id='productPageName'>${productResponse.data.products[idx].name}</h1><p id='productPageBrand'>${productResponse.data.products[idx].brand.name}</p><p id='productPagePrice'>$${productResponse.data.products[idx].price}</p><button id='productPageBuyButton' onclick='affiliateLink'>Buy Now</button><p id='productPageSize'>Sizes Available: ${productResponse.data.products[idx].size}</p><p id='productPageDescription'>${productResponse.data.products[idx].description}</p>`
         brandInfoChart.innerHTML = `<h2>${productResponse.data.products[idx].brand.name}'s Score</h2>${productPageChart}`
     })
 })
