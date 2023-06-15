@@ -122,7 +122,24 @@ nav {
     width:30px;
     margin-left:20px;
     cursor: pointer;
+}
+
+#aboutIcon{
     position: relative;
+}
+
+#userIcon{
+    position: relative;
+}
+
+#aboutDropdownContent{
+    padding:10px;
+    display:none;
+    background-color: #618242;
+    border:1px solid #d9d9d9;
+    position: absolute;
+    right:51px;
+    top:80px;
 }
 
 #userDropdownContent{
@@ -135,11 +152,22 @@ nav {
     top:80px;
 }
 
+.aboutOption{
+    background-color: #618242;
+    color:#d9d9d9;
+    border:none;
+    display: block;
+}
+
 .userOption{
     background-color: #618242;
     color:#d9d9d9;
     border:none;
     display: block;
+}
+
+.aboutOption:hover{
+    color: white;
 }
 
 .userOption:hover{
@@ -268,6 +296,34 @@ h3{
     right:0;
     bottom:0;
     z-index:-1;
+}
+
+/* ABOUT SECTION */
+
+#aboutPage{
+    display: none;
+}
+
+#aboutPageFlexbox{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#aboutVideo{
+    width:45%;
+    border: 8px solid #618242;
+    border-radius: 3%;
+}
+
+#aboutText{
+    width: 45%;
+    padding:30px 30px 40px 35px;
+    border-radius: 1%;
+    background-color: #d9d9d9;
+    color:#618242;
+    font-size:1.3rem;
+    font-weight: 600;
 }
 
 /* BANNER SECTION */
@@ -672,7 +728,7 @@ footer{
     color:#d9d9d9;
     text-align: center;
     margin-top:200px;
-    padding:10px 207px 10px;
+    padding:10px 77px 10px;
     border-radius: 1%;
 }
 
@@ -687,7 +743,7 @@ footer{
 }
 
 #footerContactInfo{
-    text-align: center;
+    text-align: right;
 }
 
 #contactUsFooter{

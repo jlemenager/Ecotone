@@ -7,7 +7,7 @@ let product = document.querySelectorAll('.product')
 const logo = document.querySelector('#logo')
 const searchBar = document.querySelector('#searchBar')
 
-        //Display Product List Constants
+    //Display Product List Constants
 
 // const dropdownOptions = document.querySelectorAll('select')
 const brandDropdownOptions = document.querySelectorAll('.brands')
@@ -37,6 +37,11 @@ const productPageImage = document.querySelector('#imageContainerLeft')
 const productPageInfo = document.querySelector('#productPageInfo')
 const brandInfoChart = document.querySelector('.brandInfoChart')
 
+    //Display About Page Constants
+
+const aboutPage = document.querySelector('#aboutPage')
+const aboutButton = document.querySelector('#modalAboutLink')
+
 //MODAL
 
     //Constants
@@ -52,9 +57,26 @@ const showModal = () => {
 const closeModal = () => {
         modal.style.display = 'none'
     }
+
+const displayAbout = () =>{
+    aboutPage.style.display = 'block'
+    products.style.display = 'none'
+    productPage.style.display = 'none'
+    modal.style.display = 'none'
+    brandInfoChart.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
     
 const displayCategoriesFromModal = async(category) => {
     products.style.display = 'block'
+    productPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     modal.style.display = 'none'
     brandInfoChart.style.display = 'none'
     deleteAccountPage.style.display = 'none'
@@ -81,6 +103,8 @@ const displayCategoriesFromModal = async(category) => {
 
 const displayBrandsFromModal = async(brand) => {
     products.style.display = 'block'
+    productPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     modal.style.display = 'none'
     brandInfoChart.style.display = 'none'
     deleteAccountPage.style.display = 'none'
@@ -109,6 +133,7 @@ document.querySelector('#hamburgerMenu').addEventListener('click', ()=>setTimeou
 document.querySelector('#modalCloseButton').addEventListener('click', ()=>setTimeout(closeModal,50))
 modalButtonCategory.forEach((elem)=>{elem.addEventListener('click', displayCategoriesFromModal)})
 modalButtonBrand.forEach((elem)=>{elem.addEventListener('click', displayBrandsFromModal)})
+aboutButton.addEventListener('click', displayAbout)
 
 //TYPING EFFECT  
     
@@ -154,6 +179,25 @@ const typingEffect = () => {
 
 typingEffect()
 
+//ABOUT SECTION
+
+    //Constants
+
+    let shownAbout = false
+
+    // Event Listeners
+
+document.querySelector('#aboutIcon').addEventListener('click', ()=>{
+    if(shownAbout === false){
+        document.querySelector(`#aboutDropdownContent`).style.display = 'block'
+        shownAbout = true
+    } else {
+        document.querySelector(`#aboutDropdownContent`).style.display = 'none'
+        shownAbout = false
+    }
+})
+
+document.querySelector('.aboutOption').addEventListener('click', displayAbout)
 
 //DISPLAY PRODUCT LIST
         
@@ -178,6 +222,7 @@ const changeSelectedCategory = async(category) => {
         updateUserInfoPage.style.display = 'none'
         loginPage.style.display = 'none'
         createAccountPage.style.display = 'none'
+        aboutPage.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=>{
@@ -220,6 +265,7 @@ const changeSelectedBrand = async(brand) => {
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
+        aboutPage.style.display = 'none'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
         deleteAccountPage.style.display = 'none'
@@ -274,6 +320,7 @@ const reset = () => {
     updateUserInfoPage.style.display = 'none'
     loginPage.style.display = 'none'
     createAccountPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
 }
@@ -385,6 +432,7 @@ product.forEach(async(elem,idx) =>{
         // const productResponse = await axios.get('http://localhost:3001/api/products')
         productPage.style.display = 'block'
         brandInfoChart.style.display = 'block'
+        aboutPage.style.display = 'none'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
         updateUserInfoPage.style.display = 'none'
@@ -452,7 +500,7 @@ const deleteAccountPage = document.querySelector('#deleteAccountPage')
 
 const userIcon = document.querySelector('#userIcon')
 
-let shown = false
+let shownUser = false
 
     //Functions
 
@@ -462,6 +510,7 @@ const displayCreateAccountPage = () => {
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     loginPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     productPage.style.display = 'none'
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
@@ -489,6 +538,7 @@ const displayLoginPage = () =>{
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     createAccountPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     productPage.style.display = 'none'
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
@@ -533,6 +583,7 @@ const displayUserInfoPage = () =>{
     logoutPage.style.display = 'none'
     loginPage.style.display = 'none'
     createAccountPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     productPage.style.display = 'none'
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
@@ -569,6 +620,7 @@ const displayLogoutPage = () =>{
     deleteAccountPage.style.display = 'none'
     loginPage.style.display = 'none'
     createAccountPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     productPage.style.display = 'none'
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
@@ -600,6 +652,7 @@ const displayDeleteAccountPage = () =>{
     updateUserInfoPage.style.display = 'none'
     loginPage.style.display = 'none'
     createAccountPage.style.display = 'none'
+    aboutPage.style.display = 'none'
     productPage.style.display = 'none'
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
@@ -624,12 +677,12 @@ const deleteAccount = async() => {
     // Event Listeners
 
 document.querySelector('#userIcon').addEventListener('click', ()=>{
-    if(shown === false){
+    if(shownUser === false){
         document.querySelector(`#userDropdownContent`).style.display = 'block'
-        shown = true
+        shownUser = true
     } else {
         document.querySelector(`#userDropdownContent`).style.display = 'none'
-        shown = false
+        shownUser = false
     }
 })
 

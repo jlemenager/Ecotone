@@ -43,12 +43,15 @@
         </div>
         <div id="userIconDiv">
             
-            <img class= "icon" id="brandDropDown" src="images/brandDropDown.png" alt="userIcon">
+            <img class= "icon" id="aboutIcon" src="images/brandDropDown.png" alt="userIcon">
             <!-- <div id="userIconWrap"> -->
             <img class= "icon"  id="userIcon" src="images/userIcon.png" alt="userIcon">
             <!-- </div> -->
         </div>
     </nav>
+    <div id="aboutDropdownContent">
+        <button class="aboutOption">Our Mission</button>
+    </div>
     <div id="userDropdownContent">
         <button class="userOption loginOption">Login</button>
         <button class="userOption createAccountOption">Create Account</button>
@@ -60,6 +63,8 @@
     <div id="modal">
         <div id="modalTextbox">
             <button id="modalCloseButton">X</button>
+            <h3>About</h3>
+            <button class="modalButton modalAbout" id="modalAboutLink">What is an Ecotone?</button>
             <h3>Categories</h3>
             <button class="modalButton modalCategory" id="modalTShirtsLink">T-Shirts</button>
             <button class="modalButton modalCategory" id="modalLongsleevesLink">Longsleeves</button>
@@ -132,6 +137,12 @@
         <div class="brandInfoChart">
         </div>
     </section>
+    <section id="aboutPage">
+        <div id="aboutPageFlexbox">
+            <video id='aboutVideo' autoplay muted loop src="images/about-us-video.mp4"></video>
+            <div id="aboutText">An ecotone is the border between two ecosystems, like the line between a desert and a forest. We want to turn the practices of e-commerce into a forest, where donating with every purchase and selling ethical products are the norms, not the exceptions. Feel free to browse the practices that went into the making of each product on our product page! Happy shopping!</div>
+        </div>
+    </section>
     <section id="createAccountPage">
         <div class='userDiv' id="createAccountDiv">
             <h1 class='userHeader' id="createAccountHeader">Create Your New Ecotone Account!</h1>
@@ -185,7 +196,7 @@
     <div id="footerFlexBox">
     <img id="footerLogo" src="images/footerLogo.png" alt="footer logo">
     <div id="footerContactInfo">
-    <h4 id="contactUsFooter">Contact Us:</h4>
+    <h4 id="contactUsFooter">Contact Us</h4>
     <span>jlemenager321@gmail.com</span><br>
     <span>(609) 731-1513</span>
     </div>
