@@ -5,7 +5,30 @@ const frontPageBanners = document.querySelector('#frontPageBanners')
 const products = document.querySelector('#products')
 let product = document.querySelectorAll('.product')
 const logo = document.querySelector('#logo')
+const searchBar = document.querySelector('#searchBar')
 
+        //Display Product List Constants
+
+// const dropdownOptions = document.querySelectorAll('select')
+const brandDropdownOptions = document.querySelectorAll('.brands')
+const categoryDropdownOptions = document.querySelectorAll('.categories')
+
+const allCategoriesOption = document.querySelector('.allCategories')
+const allBrandsOption = document.querySelector('.allBrands')
+
+let changedCategorytoAll = true
+let changedBrandtoAll = true
+let changedDropdown = false
+
+let categories = []
+let brands = []
+
+    //Display Product Page Constants
+
+const productPage = document.querySelector('#productPage')
+const productPageImage = document.querySelector('#imageContainerLeft')
+const productPageInfo = document.querySelector('#productPageInfo')
+const brandInfoChart = document.querySelector('.brandInfoChart')
 
 //MODAL
 
@@ -26,6 +49,7 @@ const closeModal = () => {
 const displayCategoriesFromModal = async(category) => {
     products.style.display = 'block'
     modal.style.display = 'none'
+    brandInfoChart.style.display = 'none'
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     updateUserInfoPage.style.display = 'none'
@@ -36,14 +60,14 @@ const displayCategoriesFromModal = async(category) => {
     const response = await axios.get('http://localhost:3001/api/products')
     product.forEach((elem, idx)=> {
         console.log('forEach working')
-        elem.classList.remove('productStyle')
-        elem.innerHTML = ''
         if(category.target.innerHTML === response.data.products[idx].category.name){
             console.log('categories match')
+            elem.style.display = 'block'
             elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-            elem.setAttribute('class','productStyle product')
         } else {
             console.log(`Not a ${response.data.products[idx].category.name}`)
+            elem.style.display = 'none'
+            elem.innerHTML = ''
         }
 })
 }
@@ -51,6 +75,7 @@ const displayCategoriesFromModal = async(category) => {
 const displayBrandsFromModal = async(brand) => {
     products.style.display = 'block'
     modal.style.display = 'none'
+    brandInfoChart.style.display = 'none'
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     updateUserInfoPage.style.display = 'none'
@@ -60,13 +85,13 @@ const displayBrandsFromModal = async(brand) => {
     frontPageBanners.style.display = 'none'
     const response = await axios.get('http://localhost:3001/api/products')
     product.forEach((elem, idx)=> {
-        elem.classList.remove('productStyle')
-        elem.innerHTML = ''
         if(brand.target.innerHTML === response.data.products[idx].brand.name){
+            elem.style.display = 'block'
             elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-            elem.setAttribute('class','productStyle product')
         } else {
             console.log(`Not from ${response.data.products[idx].brand.name}`)
+            elem.style.display = 'none'
+            elem.innerHTML = ''
         }
 })
 }
@@ -124,32 +149,26 @@ typingEffect()
 
 
 //DISPLAY PRODUCT LIST
-
-        //Constants
-
-// const dropdownOptions = document.querySelectorAll('select')
-const brandDropdownOptions = document.querySelectorAll('.brands')
-const categoryDropdownOptions = document.querySelectorAll('.categories')
-
-const allCategoriesOption = document.querySelector('.allCategories')
-const allBrandsOption = document.querySelector('.allBrands')
-
-let changedCategorytoAll = false
-let changedBrandtoAll = false
-let changedDropdown = false
         
         //Functions
 
-const changeSelectedCategory = () => {
-    document.querySelector('#categoriesDropdownButton').addEventListener('change', async(category)=>{
-        changedDropdown = true
-        changedCategorytoAll = false
+const changeSelectedCategory = async(category) => {
+        categories.push(category.target.value)
+        if (categories.length > 1){
+            categories.pop()
+        }
+        // if (category.target.value === 'All Categories'){
+        //     changedCategorytoAll = true
+        // }
         // allCategoriesOption.removeAttribute('selected')
         // category.target.setAttribute('selected','selected')
         console.log(category.target.value)
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
+        productPage.style.display = 'none'
+        brandInfoChart.style.display = 'none'
+        modal.style.display = 'none'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
         updateUserInfoPage.style.display = 'none'
@@ -158,33 +177,49 @@ const changeSelectedCategory = () => {
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=>{
-        elem.classList.remove('productStyle')
-        elem.innerHTML = ''
-        if(category.target.value === response.data.products[idx].category.name){
-        elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-        elem.setAttribute('class','productStyle')
+        if(changedBrandtoAll === true){
+            if(category.target.value === response.data.products[idx].category.name){
+                elem.style.display = 'block'
+                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+                console.log('chose cat no brand')
+                changedCategorytoAll = false
+                } else {
+                    console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
+                    elem.style.display = 'none'
+                    elem.innerHTML = ''
+                }
         } else {
-            console.log(`Not a ${response.data.products[idx].category.name}`)
-            if (category.target.value === 'All Categories'){
-                changedCategorytoAll = true
-            } else {
-                console.log('Not All Categories')
-            }
+            if(category.target.value === response.data.products[idx].category.name && brands[0] === response.data.products[idx].brand.name){
+                elem.style.display = 'block'
+                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+                console.log('chose cat with brand')
+                changedBrandtoAll = false
+                } else {
+                    console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
+                    elem.style.display = 'none'
+                    elem.innerHTML = ''
+                }
+                
         }
-    })
-    })
-}
-
-const changeSelectedBrand = () => {
-    document.querySelector('#brandsDropdownButton').addEventListener('change',async(brand)=>{
-        changedDropdown = true
-        changedBrandtoAll = false
+        })
+    }
+    
+const changeSelectedBrand = async(brand) => {
+        brands.push(brand.target.value)
+        if (brands.length > 1){
+            brands.pop()
+        }
+        // if (brand.target.value === 'All Brands'){
+        //     changedBrandtoAll = true
+        // }
         // allBrandsOption.removeAttribute('selected')
         // brand.target.setAttribute('selected','selected')
-        console.log(brand.target.value)
+        console.log(brands)
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
+        productPage.style.display = 'none'
+        brandInfoChart.style.display = 'none'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
         updateUserInfoPage.style.display = 'none'
@@ -193,56 +228,89 @@ const changeSelectedBrand = () => {
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         product.forEach((elem, idx)=> {
-        elem.classList.remove('productStyle')
-        elem.innerHTML = ''
-        if(brand.target.value === response.data.products[idx].brand.name){
-            elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-            elem.setAttribute('class','productStyle product')
-        } else {
-            console.log(`Not from ${response.data.products[idx].brand.name}`)
-            if (brand.target.value === 'All Brands'){
-                changedBrandtoAll = true
+        if (changedCategorytoAll === true) {
+            if(brand.target.value === response.data.products[idx].brand.name){
+                elem.style.display = 'block'
+                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+                console.log('chose brand no cat')
+                changedBrandtoAll = false
             } else {
-                console.log('Not All Brands')
+                console.log(`Not from ${response.data.products[idx].brand.name} or a ${response.data.products[idx].category.name}`)
+                elem.style.display = 'none'
+                elem.innerHTML = ''
+            }
+        } else {
+            if(brand.target.value === response.data.products[idx].brand.name && categories[0] === response.data.products[idx].category.name){
+                elem.style.display = 'block'
+                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+                console.log('chose brand with cat')
+            } else {
+                console.log(`Not from ${response.data.products[idx].brand.name} or a ${response.data.products[idx].category.name}`)
+                elem.style.display = 'none'
+                elem.innerHTML = ''
             }
         }
     })
+}
+
+const displayAllProducts = async() => {
+    document.querySelector('#categoriesDropdownButton').addEventListener('change', changeSelectedCategory)
+    document.querySelector('#brandsDropdownButton').addEventListener('change', changeSelectedBrand)
+}
+
+displayAllProducts()
+
+const reset = () => {
+    products.style.display = 'block'
+    productPage.style.display = 'none'
+    product.forEach((elem)=>{elem.style.display = 'none'})
+    brandInfoChart.style.display = 'none'
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+const showSearch = async() => {
+    let search = searchBar.value
+
+    const response = await axios.get('http://localhost:3001/api/products')
+
+let searchBarColorMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black|brown|tan)/gi)
+let searchBarCategoryMatches = search.match(/(t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?)/gi)
+  if (searchBarColorMatches.length>0 || searchBarCategoryMatches.length>0){
+    console.log(searchBarColorMatches)
+    console.log(searchBarCategoryMatches)
+    reset()
+    let searchBarMatches = searchBarColorMatches.concat(searchBarCategoryMatches)
+    //https://blog.gitnux.com/code/javascript-append-array/#:~:text=In%20JavaScript%2C%20you%20can%20append,using%20the%20Array%20Spread%20Operator.&text=Both%20of%20these%20methods%20will,without%20modifying%20the%20original%20arrays.
+    console.log(response.data)
+    searchBarMatches.forEach((elem, idx)=>{
+        for(let i = 0;i<response.data.products.length;i++){
+            let color = response.data.products[i].color
+            console.log(color)
+            let category = response.data.products[i].category.name
+            console.log(category)
+            if(color.includes(elem) || category.includes(elem)){
+                document.querySelectorAll('.product')[0].style.display = 'block'
+                document.querySelectorAll('.product')[0].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
+                console.log('working')
+            } else {
+                console.log("didn't match")
+            }
+        }
     })
 }
-changeSelectedCategory()
-changeSelectedBrand()
-const displayAllProducts = async() => {
-    const response = await axios.get('http://localhost:3001/api/products')
-    document.querySelector('#brandsDropdownButton').addEventListener('change',(brand)=>{
-    })
-    if((changedCategorytoAll === true && changedBrandtoAll === true) || changedDropdown === false){
-        products.style.display = 'block'
-        frontPageMain.style.display = 'none'
-        frontPageBanners.style.display = 'none'
-        loginPage.style.display = 'none'
-        createAccountPage.style.display = 'none'
-        deleteAccountPage.style.display = 'none'
-        logoutPage.style.display = 'none'
-        updateUserInfoPage.style.display = 'none'
-        console.log(response)
-        product.forEach((elem, idx)=>elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`)
-    } else  {
-        console.log('happy days')
-    }
 }
 
         //Event Listener
 
-document.querySelector('#searchButton').addEventListener('click',displayAllProducts)
+document.querySelector('#searchButton').addEventListener('click',showSearch)
 
 //DISPLAY PRODUCT PAGE
-
-    //Constants
-
-const productPage = document.querySelector('#productPage')
-const productPageImage = document.querySelector('#imageContainerLeft')
-const productPageInfo = document.querySelector('#productPageInfo')
-const brandInfoChart = document.querySelector('.brandInfoChart')
     
     //Functions
 
@@ -256,7 +324,9 @@ const affiliateLink = async() => {
 product.forEach(async(elem,idx) =>{
     const productResponse = await axios.get('http://localhost:3001/api/products')
     elem.addEventListener('click', async()=>{
+        console.log('clicked')
         productPage.style.display = 'block'
+        brandInfoChart.style.display = 'block'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
         updateUserInfoPage.style.display = 'none'
@@ -281,11 +351,11 @@ product.forEach(async(elem,idx) =>{
                     points: [
                         {x:'B Corporation', y:productResponse.data.products[idx].brand.bCorp},
                         {x:'Ethically Made', y:productResponse.data.products[idx].brand.ethicallyMade},
-                        {x:'Donate to Charities', y:productResponse.data.products[idx].brand.donateToCharities},
+                        {x:'Donates to Charities', y:productResponse.data.products[idx].brand.donateToCharities},
                         {x:'Vegan', y:productResponse.data.products[idx].brand.vegan},
                         {x:'Organic', y:productResponse.data.products[idx].brand.percentOrganic},
                         {x:'Carbon Neutral', y:productResponse.data.products[idx].brand.percentOrganic},
-                        {x:'Recycled Materials', y:productResponse.data.products[idx].brand.recycledMaterialsUsed}
+                        {x:'Uses Recycled Materials', y:productResponse.data.products[idx].brand.recycledMaterialsUsed}
                     ]
                 }
             ]
@@ -352,6 +422,7 @@ const createUser = async() => {
         password: passwordInput
     })
     userIcon.setAttribute('src', 'images/loggedInIcon.png')
+    alert('Welcome to the Ecotone family!')
 }
 
 const displayLoginPage = () =>{
@@ -386,12 +457,15 @@ const updateUserLogin = async() => {
                     loggedIn:true
                 })
                 console.log('logged in')
+                alert('You are logged in.')
                 userIcon.setAttribute('src', 'images/loggedInIcon.png')
             } else {
                 console.log('Already logged in')
+                alert('You are already logged in.')
             }
         } else {
             console.log('Not valid login')
+            // alert('No account listed with that information.')
         }
 }}
 
@@ -423,8 +497,10 @@ const updateUserInfo = async() => {
                 password: passwordInput
             })
             console.log('Updated account')
+            alert('Your account is updated.')
         } else {
             console.log('Not logged in')
+            // alert('You are not logged in.')
         }
     }
 }
@@ -452,8 +528,10 @@ const updateUserLogout = async() => {
             })
             console.log('Logged out')
             userIcon.setAttribute('src', 'images/userIcon.png')
+            alert('You are logged out.')
         } else {
             console.log('Didnt log out')
+            // alert('Log out not successful.')
         }
     }
 }
@@ -478,8 +556,9 @@ const deleteAccount = async() => {
             await axios.delete(`http://localhost:3001/api/users/delete/${elem._id}`)
             console.log('Account deleted')
             userIcon.setAttribute('src', 'images/userIcon.png')
+            alert('Your account is successfully deleted.')
         } else {
-            console.log('Account not logged in')
+            // console.log("We couldn't find your account. Either you are not logged in or you haven't created one yet.")
         }
     })
 }
