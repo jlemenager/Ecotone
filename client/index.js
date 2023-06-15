@@ -303,12 +303,31 @@ const changeSelectedBrand = async(brand) => {
     })
 }
 
-const displayAllProducts = async() => {
+const displayProducts = async() => {
     document.querySelector('#categoriesDropdownButton').addEventListener('change', changeSelectedCategory)
     document.querySelector('#brandsDropdownButton').addEventListener('change', changeSelectedBrand)
 }
 
-displayAllProducts()
+displayProducts()
+
+const displayAllProducts = async() => {
+    const response = await axios.get('http://localhost:3001/api/products')
+        document.querySelector('#productGrid').style.display = 'grid'
+        products.style.display = 'block'
+        aboutPage.style.display = 'none'
+        productPage.style.display = 'none'
+        brandInfoChart.style.display = 'none'
+        deleteAccountPage.style.display = 'none'
+        logoutPage.style.display = 'none'
+        updateUserInfoPage.style.display = 'none'
+        loginPage.style.display = 'none'
+        createAccountPage.style.display = 'none'
+        frontPageMain.style.display = 'none'
+        frontPageBanners.style.display = 'none'
+        product.forEach((elem,idx)=>{
+            elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+        })
+}
 
 const reset = () => {
     products.style.display = 'block'
@@ -487,6 +506,31 @@ product.forEach(async(elem,idx) =>{
     //Event Listeners
 
 logo.addEventListener('click', ()=>location.reload())
+
+//BANNERS
+
+    //Constants
+
+const bannerProductPhoto = document.querySelector('#productPhoto')
+let x = 1
+
+    //Functions
+
+const showProductBanner = async(req,res)=>{
+    const response = await axios.get('http://localhost:3001/api/products')
+    let num = Math.round(Math.random()*12)
+    for(let i = 0; i<response.data.products.length;i++){
+        bannerProductPhoto.innerHTML = `<img class='productBannerImage' src='${response.data.products[num].mainImage}'>`
+    } 
+}
+    // Event Listeners
+
+
+document.querySelector('#bannerLeft').addEventListener('mouseenter', showProductBanner)
+document.querySelector('#bannerLeft').addEventListener('click', displayAllProducts)
+document.querySelector('#bannerRightTop').addEventListener('click', displayAllProducts)
+document.querySelector('#bannerRightBottom').addEventListener('click', displayAbout)
+// document.querySelector('#frontPageBanners').addEventListener('mouseleave', ()=>{bannerProductPhoto.innerHTML = ''})
 
 //CRUD USER 
 

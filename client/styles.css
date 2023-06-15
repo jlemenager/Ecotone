@@ -345,6 +345,24 @@ h3{
     height:100%;
     width:100%;
     border-radius: 5%;
+    cursor: pointer;
+}
+
+#bannerLeft h1{
+    margin:0;
+    padding:40px 40px 20px;
+    color:#d9d9d9;
+}
+
+#productPhoto{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productBannerImage{
+    width:40%;
+    border-radius:3%;
 }
 
 #bannerGridRight {
@@ -360,13 +378,35 @@ h3{
 }
 
 #bannerRightTop{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
     height:45%;
     margin:0 0 22px 0;
+    cursor: pointer;
+}
+
+#bannerRightTop h1{
+    font-size: 1.7rem;
+    color: #618242;
 }
 
 #bannerRightBottom{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
     height:50%;
     margin:0;
+    cursor: pointer;
+}
+
+#bannerRightBottom h1{
+    font-size: 1.7rem;
+    color: #618242;
+}
+
+.bannerPhoto{
+    width:30%;
 }
 
 
