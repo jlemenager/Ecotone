@@ -20,9 +20,8 @@ const createProducts = async() => {
             size: 'M, L',
             inStock: true,
             description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1889_gray_1x1_b2b71027-871c-4c2c-856f-e4df7620288f_1080x.jpg?v=1680966385'),
-            image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/ig2_1080x.jpg?v=1682019038'),
-            image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/ig1_1080x.jpg?v=1682019038')
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/ig2_1080x.jpg?v=1682019038'),
+            image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/ig1_1080x.jpg?v=1682019038')
         },
         {
             name: 'Tree of Life',
@@ -47,7 +46,7 @@ const createProducts = async() => {
             size: 'S, M, L, XL, 2XL, 3XL',
             inStock: true,
             description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1853_gray_1x1_c3ebe091-b681-4465-a805-63f353dfe9c8_1080x.jpg?v=1681002740')
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/IMG_1853_gray_1080x.jpg?v=1686761078')
         },
         {
             name: 'Make Waves',
@@ -126,7 +125,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, XL',
             inStock: true,
             description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1888_gray_1x1_5c71829d-159e-4c65-b5f9-b3dcd8ed96ff_1080x.jpg?v=1681142339')
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/IMG_1888_gray_1080x.jpg?v=1686761007')
         },
         {
             name: 'Cacao Tree | Alter Eco x Happy Earth',

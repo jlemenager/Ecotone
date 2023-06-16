@@ -459,10 +459,10 @@ document.querySelector('#searchButton').addEventListener('click',showSearch)
     
     //Functions
 
-const affiliateLink = async() => {
-    const productResponse = await axios.get('http://localhost:3001/api/products')
-    window.open(`${productResponse.data.products[idx].link}`)
-}
+// const affiliateLink = async() => {
+//     const productResponse = await axios.get('http://localhost:3001/api/products')
+//     window.open(`${productResponse.data.products[idx].link}`)
+// }
     
     //Event Listeners
 
