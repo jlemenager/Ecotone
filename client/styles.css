@@ -386,6 +386,10 @@ h3{
     cursor: pointer;
 }
 
+#thumbsUpImg{
+    margin-left:-20px;
+}
+
 #bannerRightTop h1{
     font-size: 1.7rem;
     color: #618242;

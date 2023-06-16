@@ -42,6 +42,10 @@ const brandInfoChart = document.querySelector('.brandInfoChart')
 const aboutPage = document.querySelector('#aboutPage')
 const aboutButton = document.querySelector('#modalAboutLink')
 
+    //Footer Constants
+
+const footer = document.querySelector('footer')
+
 //MODAL
 
     //Constants
@@ -64,6 +68,7 @@ const displayAbout = () =>{
     productPage.style.display = 'none'
     modal.style.display = 'none'
     brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     updateUserInfoPage.style.display = 'none'
@@ -78,6 +83,7 @@ const displayCategoriesFromModal = async(category) => {
     productPage.style.display = 'none'
     aboutPage.style.display = 'none'
     modal.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     brandInfoChart.style.display = 'none'
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
@@ -107,6 +113,7 @@ const displayBrandsFromModal = async(brand) => {
     aboutPage.style.display = 'none'
     modal.style.display = 'none'
     brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     updateUserInfoPage.style.display = 'none'
@@ -216,6 +223,7 @@ const changeSelectedCategory = async(category) => {
         products.style.display = 'block'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
+        brandInfoChart.innerHTML = ''
         modal.style.display = 'none'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
@@ -268,6 +276,7 @@ const changeSelectedBrand = async(brand) => {
         aboutPage.style.display = 'none'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
+        brandInfoChart.innerHTML = ''
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
         updateUserInfoPage.style.display = 'none'
@@ -317,6 +326,7 @@ const displayAllProducts = async() => {
         aboutPage.style.display = 'none'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
+        brandInfoChart.innerHTML = ''
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
         updateUserInfoPage.style.display = 'none'
@@ -334,6 +344,7 @@ const reset = () => {
     productPage.style.display = 'none'
     product.forEach((elem)=>{elem.style.display = 'none'})
     brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     deleteAccountPage.style.display = 'none'
     logoutPage.style.display = 'none'
     updateUserInfoPage.style.display = 'none'
@@ -344,41 +355,43 @@ const reset = () => {
     frontPageBanners.style.display = 'none'
 }
 
-const showColorSearch = async() => {
-let search = searchBar.value
+// const showColorSearch = async() => {
+// let search = searchBar.value
 
-const response = await axios.get('http://localhost:3001/api/products')
+// const response = await axios.get('http://localhost:3001/api/products')
 
-let searchBarColorMatches = search.match(/([Bb]lue?|[Gg]reen?|(R|r)ed?|(P|p)urple?|(P|p)ink?|(Y|y)ellow?|(B|b)lack?|(B|b)rown?|(T|t)an?)/gi)
-let searchBarCategoryMatches = search.match(/(t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?)/gi)
-  if (searchBarColorMatches.length>0 || searchBarCategoryMatches.length>0){
-    console.log(searchBarColorMatches)
-    console.log(searchBarCategoryMatches)
-    reset()
-    let searchBarMatches = searchBarColorMatches.concat(searchBarCategoryMatches)
-    //https://blog.gitnux.com/code/javascript-append-array/#:~:text=In%20JavaScript%2C%20you%20can%20append,using%20the%20Array%20Spread%20Operator.&text=Both%20of%20these%20methods%20will,without%20modifying%20the%20original%20arrays.
-    console.log(response.data)
-    searchBarMatches.forEach((elem, idx)=>{
-        for(let i = 0;i<response.data.products.length;i++){
-            let color = response.data.products[i].color
-            console.log(color)
-            let category = response.data.products[i].category.name
-            console.log(category)
-            if(color.includes(elem) || category.includes(elem)){
-                document.querySelectorAll('.product')[i].style.display = 'block'
-                document.querySelectorAll('.product')[i].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
-                console.log('working')
-            } else {
-                console.log("didn't match")
-            }
-        }
-    })
-}
-}
+// let searchBarColorMatches = search.match(/([Bb]lue?|[Gg]reen?|(R|r)ed?|(P|p)urple?|(P|p)ink?|(Y|y)ellow?|(B|b)lack?|(B|b)rown?|(T|t)an?)/gi)
+// let searchBarCategoryMatches = search.match(/(t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?)/gi)
+//   if (searchBarColorMatches.length>0 || searchBarCategoryMatches.length>0){
+//     console.log(searchBarColorMatches)
+//     console.log(searchBarCategoryMatches)
+//     reset()
+//     let searchBarMatches = searchBarColorMatches.concat(searchBarCategoryMatches)
+//     //https://blog.gitnux.com/code/javascript-append-array/#:~:text=In%20JavaScript%2C%20you%20can%20append,using%20the%20Array%20Spread%20Operator.&text=Both%20of%20these%20methods%20will,without%20modifying%20the%20original%20arrays.
+//     console.log(response.data)
+//     searchBarMatches.forEach((elem, idx)=>{
+//         for(let i = 0;i<response.data.products.length;i++){
+//             let color = response.data.products[i].color
+//             console.log(color)
+//             let category = response.data.products[i].category.name
+//             console.log(category)
+//             if(color.includes(elem) || category.includes(elem)){
+//                 document.querySelectorAll('.product')[i].style.display = 'block'
+//                 document.querySelectorAll('.product')[i].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
+//                 console.log('working')
+//             } else {
+//                 console.log("didn't match")
+//             }
+//         }
+//     })
+// }
+// }
 
 const showSearch = async() => {
     let search = searchBar.value
     let searchList = []
+    let sortedList = []
+    let x = 0
     const response = await axios.get('http://localhost:3001/api/products')
     
     let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
@@ -410,23 +423,32 @@ const showSearch = async() => {
                 }
             }
             searchList.sort()
+
+            
             searchList.forEach((elem, idx)=>{
-                console.log(elem)
-                elem.slice(0,1)
-            })
-        
-            console.log(searchList)
+                // elem.slice(0,1)
+                elem = elem.substring(1)
+                elem = parseInt(elem)
+                sortedList.push(elem)
+        })
+        sortedList.forEach((e)=>{
+                console.log(e)
+                let constant = document.querySelectorAll('.product')[x]
+                x++
                 //https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/
-                document.querySelectorAll('.product')[elem].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
-                document.querySelectorAll('.product')[elem].style.display = 'block'
+                constant.style.display = 'block'
+                constant.innerHTML = `<img class='productImage' src='${response.data.products[e].mainImage}'><p class='productInfo productPrice'>$${response.data.products[e].price}</p><p class='productInfo productName'>${response.data.products[e].name}</p><p class='productInfo productBrand'>${response.data.products[e].brand.name}</p><p class='productInfo productSize'>${response.data.products[e].size}</p>`
                 console.log('working')
-      }
+            
+        })
+        
+            }
     }
 
-    const searchFilter = () => {
-        showColorSearch()
-        showCategorySearch()
-    }
+    // const searchFilter = () => {
+    //     showColorSearch()
+    //     showCategorySearch()
+    // }
 
         //Event Listener
 
@@ -446,11 +468,11 @@ const affiliateLink = async() => {
 product.forEach(async(elem,idx) =>{
     
     elem.addEventListener('click', async()=>{
-        const productResponse = await axios.get('http://localhost:3001/api/products')
         console.log('clicked')
         // const productResponse = await axios.get('http://localhost:3001/api/products')
         productPage.style.display = 'block'
         brandInfoChart.style.display = 'block'
+        brandInfoChart.innerHTML = ''
         aboutPage.style.display = 'none'
         deleteAccountPage.style.display = 'none'
         logoutPage.style.display = 'none'
@@ -460,7 +482,9 @@ product.forEach(async(elem,idx) =>{
         products.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
-
+        footer.style.display = 'none'
+        // productPageChart.setAttribute('id','productPageChart')
+        const productResponse = await axios.get('http://localhost:3001/api/products')
         const productPageChart = new JSC.Chart('brandInfoChart', {
             type: 'horizontal column',
             width:'800px',
@@ -485,11 +509,10 @@ product.forEach(async(elem,idx) =>{
                 }
             ]
         })
-        // productPageChart.setAttribute('id','productPageChart')
-
         productPageImage.innerHTML = `<img id='productPageImage' src='${productResponse.data.products[idx].mainImage}'>`
         productPageInfo.innerHTML = `<h1 id='productPageName'>${productResponse.data.products[idx].name}</h1><p id='productPageBrand'>${productResponse.data.products[idx].brand.name}</p><p id='productPagePrice'>$${productResponse.data.products[idx].price}</p><button id='productPageBuyButton' onclick='affiliateLink'>Buy Now</button><p id='productPageSize'>Sizes Available: ${productResponse.data.products[idx].size}</p><p id='productPageDescription'>${productResponse.data.products[idx].description}</p>`
         brandInfoChart.innerHTML = `<h2>${productResponse.data.products[idx].brand.name}'s Score</h2>${productPageChart}`
+    
     })
 })
 
@@ -556,6 +579,8 @@ const displayCreateAccountPage = () => {
     loginPage.style.display = 'none'
     aboutPage.style.display = 'none'
     productPage.style.display = 'none'
+    brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
@@ -584,6 +609,8 @@ const displayLoginPage = () =>{
     createAccountPage.style.display = 'none'
     aboutPage.style.display = 'none'
     productPage.style.display = 'none'
+    brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
@@ -629,6 +656,8 @@ const displayUserInfoPage = () =>{
     createAccountPage.style.display = 'none'
     aboutPage.style.display = 'none'
     productPage.style.display = 'none'
+    brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
@@ -666,6 +695,8 @@ const displayLogoutPage = () =>{
     createAccountPage.style.display = 'none'
     aboutPage.style.display = 'none'
     productPage.style.display = 'none'
+    brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
@@ -698,6 +729,8 @@ const displayDeleteAccountPage = () =>{
     createAccountPage.style.display = 'none'
     aboutPage.style.display = 'none'
     productPage.style.display = 'none'
+    brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
     products.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
