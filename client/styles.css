@@ -48,6 +48,7 @@ nav {
     display:flex;
     align-items: row;
     justify-content: center;
+    margin-top:4px;
 }
 
 #searchIconDiv {
