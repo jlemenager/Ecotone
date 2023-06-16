@@ -143,6 +143,33 @@ const createProducts = async() => {
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/1101008AlterEcoCacaoTree-1_1080x.jpg?v=1680199843')
         },
         {
+            name: 'Half Dome',
+            category: longsleeves[0]._id,
+            brand: happyEarthApparel[0]._id,
+            link: new URL('https://www.happyearthapparel.com/collections/shirts/products/half-dome'),
+            price: 38,
+            color: 'Green',
+            size: 'S, M, 2XL',
+            inStock: true,
+            description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/half-dome-916568_1080x.jpg?v=1686750885'),
+            image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/HalfDome_web_1080x.jpg?v=1686750885'),
+            image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/half-dome-191663_1080x.jpg?v=1686750885')
+        },
+        {
+            name: 'Solstice Fir',
+            category: longsleeves[0]._id,
+            brand: happyEarthApparel[0]._id,
+            link: new URL('https://www.happyearthapparel.com/collections/shirts/products/solstice-fir'),
+            price: 38,
+            color: 'Green',
+            size: 'XS, S, M, L, XL, 2XL',
+            inStock: true,
+            description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/solstice-fir-organic-long-sleeve-tee-happy-earth-apparel-490122_1080x.jpg?v=1686757133'),
+            image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/SolsticeFir_web_1080x.jpg?v=1686757133')
+        },
+        {
             name: 'Dynamic Recycled Stink-Free Sleeveless Top',
             category: tShirtsWomen[0]._id,
             brand: mpgSport[0]._id,
@@ -197,6 +224,34 @@ const createProducts = async() => {
             mainImage: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A0514-C0623-1_800x.jpg?v=1675286891'),
             image2: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A0514-C0623-3_800x.jpg?v=1675286891'),
             image3: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A0514-C0623-6_800x.jpg?v=1675286891')
+        },
+        {
+            name: 'Calm Relaxed Top',
+            category: tShirtsWomen[0]._id,
+            brand: mpgSport[0]._id,
+            link: new URL('https://mpgsport.com/collections/womens-t-shirts/products/calm-relaxed-top'),
+            price: 38,
+            color: 'Blue',
+            size: 'XS, S, M, L, XL',
+            inStock: true,
+            description: "Turn down the noise. And shift into slower gear in this relaxed and cropped top with an on-trend, oversized silhouette. This is laid-back, uber-cool style for those who want to look good in chill mode.",
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A0914-2623-1_800x.jpg?v=1674775556'),
+            image2: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A0914-2623-4_800x.jpg?v=1674775556'),
+            image3: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A0914-Calm-Tshirt-cobalt_800x.jpg?v=1676665497')
+        },
+        {
+            name: 'Pace Sliced Front Long Sleeve Top',
+            category: longsleevesWomen[0]._id,
+            brand: mpgSport[0]._id,
+            link: new URL('https://mpgsport.com/collections/womens-t-shirts/products/pace-sliced-front-long-sleeve-top'),
+            price: 54,
+            color: 'White',
+            size: 'XS, S, M, L, XL',
+            inStock: true,
+            description: "Find your rhythm. Pair this super soft top featuring an on-trend sliced opening with oversized cargo or wide-leg pants for a look that says, “I’m street tough, but I also enjoy being comfy.”",
+            mainImage: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A1013-1171-1_800x.jpg?v=1674775512'),
+            image2: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A1013-1171-4_800x.jpg?v=1674775512'),
+            image3: new URL('https://cdn.shopify.com/s/files/1/2785/1604/products/11A1013-1171-3_800x.jpg?v=1674775512')
         }
     ]
     await Product.insertMany(products)
