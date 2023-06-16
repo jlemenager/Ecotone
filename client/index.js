@@ -197,6 +197,7 @@ typingEffect()
 document.querySelector('#aboutIcon').addEventListener('click', ()=>{
     if(shownAbout === false){
         document.querySelector(`#aboutDropdownContent`).style.display = 'block'
+        document.querySelector(`#userDropdownContent`).style.display = 'none'
         shownAbout = true
     } else {
         document.querySelector(`#aboutDropdownContent`).style.display = 'none'
@@ -756,6 +757,7 @@ const deleteAccount = async() => {
 document.querySelector('#userIcon').addEventListener('click', ()=>{
     if(shownUser === false){
         document.querySelector(`#userDropdownContent`).style.display = 'block'
+        document.querySelector(`#aboutDropdownContent`).style.display = 'none'
         shownUser = true
     } else {
         document.querySelector(`#userDropdownContent`).style.display = 'none'
