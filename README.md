@@ -24,6 +24,8 @@ Technologies Used: HTML, CSS, Javascript, Node.js, Express.js, MongoDB, Mongoose
 
 Future Goals:
 
+I want to add more products so that the user experience is more exciting.
+
 I want to fix the bug with the JSCharting Graph that multiplies after you click on multiple products.
 
 I want to make the footer stay in the bottom of the document even when no products are clicked.
