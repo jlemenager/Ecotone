@@ -32,6 +32,8 @@ I want to make the footer stay in the bottom of the document even when no produc
 
 I want to allow the user to click 'All Categories' or 'All Brands' after clicking on other options and have it filter it accordingly.
 
+I want to have more images in the product page to hover over and change the main picture.
+
 I want to get affiliate links to make it a real store.
 
 I want to show the money that was donated through our affiliate revenue in the product section to three different charities (Trees, The Rainforest Foundation, and the Malaria Consortium) from our affiliate revenue.
