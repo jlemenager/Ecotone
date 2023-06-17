@@ -428,7 +428,7 @@ h3{
 }
 
 .product{
-    display:block;
+    display:none;
 }
 
 /* .p1{
@@ -512,7 +512,7 @@ h3{
     width:45%;
 }
 
-#productPageImage{
+.productsPageImage{
     width:100%;
     border-radius: 5%;
 }

@@ -211,13 +211,61 @@ document.querySelector('.aboutOption').addEventListener('click', displayAbout)
         
         //Functions
 
+        // const changeSelectedCategory = async(category) => {
+        //     console.log(changedCategorytoAll)
+        //     console.log(changedBrandtoAll)
+        //     console.log(category.target.value)
+        //     categories.unshift(category.target.value)
+        //     if (categories.length > 1){
+        //         categories.pop()
+        //     }
+        //     const response = await axios.get('http://localhost:3001/api/products')
+        //     document.querySelector('#productGrid').style.display = 'grid'
+        //     products.style.display = 'block'
+        //     productPage.style.display = 'none'
+        //     brandInfoChart.style.display = 'none'
+        //     brandInfoChart.innerHTML = ''
+        //     modal.style.display = 'none'
+        //     deleteAccountPage.style.display = 'none'
+        //     logoutPage.style.display = 'none'
+        //     updateUserInfoPage.style.display = 'none'
+        //     loginPage.style.display = 'none'
+        //     createAccountPage.style.display = 'none'
+        //     aboutPage.style.display = 'none'
+        //     frontPageMain.style.display = 'none'
+        //     frontPageBanners.style.display = 'none'
+        //     product.forEach((elem, idx)=>{
+        //     if(changedBrandtoAll === true){
+        //         changedCategorytoAll = false
+        //         if(category.target.value === response.data.products[idx].category.name){
+        //             elem.style.display = 'block'
+        //             elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+        //             console.log('chose cat no brand')
+        //             console.log(category.target.value)
+        //             } else {
+        //                 // console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
+        //                 elem.style.display = 'none'
+        //                 elem.innerHTML = ''
+        //             }
+        //     } else {
+        //         if(category.target.value === response.data.products[idx].category.name && brands[0] === response.data.products[idx].brand.name){
+        //             elem.style.display = 'block'
+        //             elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+        //             console.log('chose cat with brand')
+        //             console.log(brands[0])
+        //             } else {
+        //                 console.log(`Not selected because its a ${response.data.products[idx].category.name} and from ${response.data.products[idx].brand.name}`)
+        //                 elem.style.display = 'none'
+        //                 elem.innerHTML = ''
+        //             }
+                    
+        //     }
+        //     })
+        // }
 const changeSelectedCategory = async(category) => {
-        console.log(changedCategorytoAll)
-        console.log(changedBrandtoAll)
-        console.log(category.target.value)
-        categories.push(category.target.value)
+        categories.unshift(category.target.value)
         if (categories.length > 1){
-            categories.shift()
+            categories.pop()
         }
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
@@ -234,23 +282,29 @@ const changeSelectedCategory = async(category) => {
         aboutPage.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
-        product.forEach((elem, idx)=>{
+        let categoryArray = []
+        for(let i =0;i<response.data.products.length;i++){
+            if(category.target.value === response.data.products[i].category.name){
+                categoryArray.push(i)
+            } else {
+                console.log(`This is from ${response.data.products[i].category.name}`)
+            }
+        }
+        console.log(categoryArray)
+        categoryArray.forEach((elem, idx)=>{
         if(changedBrandtoAll === true){
             changedCategorytoAll = false
-            if(category.target.value === response.data.products[idx].category.name){
-                elem.style.display = 'block'
-                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+                document.querySelectorAll('.product')[idx].style.display = 'block'
+                document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
                 console.log('chose cat no brand')
                 console.log(category.target.value)
-                } else {
                     // console.log(`Not a ${response.data.products[idx].category.name} or from ${response.data.products[idx].brand.name}`)
-                    elem.style.display = 'none'
-                    elem.innerHTML = ''
-                }
+                
         } else {
-            if(category.target.value === response.data.products[idx].category.name && brands[0] === response.data.products[idx].brand.name){
-                elem.style.display = 'block'
-                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
+            changedCategorytoAll = false
+            if(category.target.value === response.data.products[elem].category.name && brands[0] === response.data.products[elem].brand.name){
+                document.querySelectorAll('.product')[idx].style.display = 'block'
+                document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
                 console.log('chose cat with brand')
                 console.log(brands[0])
                 } else {
@@ -264,12 +318,9 @@ const changeSelectedCategory = async(category) => {
     }
     
 const changeSelectedBrand = async(brand) => {
-        console.log(changedCategorytoAll)
-        console.log(changedBrandtoAll)
-        console.log(brand.target.value)
-        brands.push(brand.target.value)
+        brands.unshift(brand.target.value)
         if (brands.length > 1){
-            brands.shift()
+        brands.pop()
         }
         const response = await axios.get('http://localhost:3001/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
@@ -285,32 +336,40 @@ const changeSelectedBrand = async(brand) => {
         createAccountPage.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
-        product.forEach((elem, idx)=> {
-        if (changedCategorytoAll === true) {
-            changedBrandtoAll = false
-            if(brand.target.value === response.data.products[idx].brand.name){
-                elem.style.display = 'block'
-                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-                console.log('chose brand no cat')
-                console.log(brand.target.value)
+        let brandArray = []
+        for(let i =0;i<response.data.products.length;i++){
+            if(brand.target.value === response.data.products[i].brand.name){
+                brandArray.push(i)
             } else {
-                console.log(`Not from ${response.data.products[idx].brand.name} or a ${response.data.products[idx].category.name}`)
-                elem.style.display = 'none'
-                elem.innerHTML = ''
-            }
-        } else {
-            changedBrandtoAll = false
-            if(brand.target.value === response.data.products[idx].brand.name && categories[0] === response.data.products[idx].category.name){
-                elem.style.display = 'block'
-                elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-                console.log('chose brand with cat')
-            } else {
-                console.log(`Not selected because its from ${response.data.products[idx].brand.name} and a ${response.data.products[idx].category.name}`)
-                elem.style.display = 'none'
-                elem.innerHTML = ''
+                console.log(`This is from ${response.data.products[i].brand.name}`)
             }
         }
-    })
+        console.log(brandArray)
+        brandArray.forEach((elem, idx)=> {
+            if (changedCategorytoAll === true) {
+                changedBrandtoAll = false
+                    document.querySelectorAll('.product')[idx].style.display = 'block'
+                    document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
+                    console.log('chose brand no cat')
+                    console.log(elem)
+                    // console.log(`Not from ${response.data.products[idx].brand.name} or a ${response.data.products[idx].category.name}`)
+                    // // elem.style.display = 'none'
+                    // // elem.innerHTML = ''
+                    // products.insertAdjacentHTML('beforeend',"<div class='product productStyle'></div>")
+                } else {
+                changedBrandtoAll = false
+                if(brand.target.value === response.data.products[elem].brand.name && categories[0] === response.data.products[elem].category.name){
+                    document.querySelectorAll('.product')[idx].style.display = 'block'
+                    document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
+                    console.log('chose brand with cat')
+                } else {
+                    console.log(`Not selected because its from ${response.data.products[elem].brand.name} and a ${response.data.products[elem].category.name}`)
+                    document.querySelectorAll('.product')[idx].style.display = 'none'
+                    // document.querySelectorAll('.product')[idx].innerHTML = ''
+                }
+            }
+        })
+        brandArray = []
 }
 
 const displayProducts = async() => {
@@ -395,12 +454,10 @@ const showSearch = async() => {
     let x = 0
     const response = await axios.get('http://localhost:3001/api/products')
     
-    let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
+    let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|white?|gray?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
       if (searchBarMatches.length>0){
-        console.log(searchBarMatches)
         reset()
         //https://blog.gitnux.com/code/javascript-append-array/#:~:text=In%20JavaScript%2C%20you%20can%20append,using%20the%20Array%20Spread%20Operator.&text=Both%20of%20these%20methods%20will,without%20modifying%20the%20original%20arrays.
-        console.log(response.data)
             for(let i = 0;i<response.data.products.length;i++){
                 let category = response.data.products[i].category.name
                 let color = response.data.products[i].color
@@ -433,7 +490,6 @@ const showSearch = async() => {
                 sortedList.push(elem)
         })
         sortedList.forEach((e)=>{
-                console.log(e)
                 let constant = document.querySelectorAll('.product')[x]
                 x++
                 //https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/
@@ -466,10 +522,65 @@ document.querySelector('#searchButton').addEventListener('click',showSearch)
     
     //Event Listeners
 
+// product.forEach(async(elem,idx) =>{
+    
+//     elem.addEventListener('click', async()=>{
+//         // const productResponse = await axios.get('http://localhost:3001/api/products')
+//         productPage.style.display = 'block'
+//         brandInfoChart.style.display = 'block'
+//         brandInfoChart.innerHTML = ''
+//         aboutPage.style.display = 'none'
+//         deleteAccountPage.style.display = 'none'
+//         logoutPage.style.display = 'none'
+//         updateUserInfoPage.style.display = 'none'
+//         loginPage.style.display = 'none'
+//         createAccountPage.style.display = 'none'
+//         products.style.display = 'none'
+//         frontPageMain.style.display = 'none'
+//         frontPageBanners.style.display = 'none'
+//         footer.style.display = 'none'
+//         let image = elem.querySelector('.productImage').attributes.src
+//         let name = elem.querySelector('.productName').innerHTML
+//         let price = elem.querySelector('.productPrice').innerHTML
+//         let brand = elem.querySelector('.productBrand').innerHTML
+//         let size = elem.querySelector('.productSize').innerHTML
+//         console.log(image)
+//         // productPageChart.setAttribute('id','productPageChart')
+//         const productResponse = await axios.get('http://localhost:3001/api/products')
+//         const productPageChart = new JSC.Chart('brandInfoChart', {
+//             type: 'horizontal column',
+//             width:'800px',
+//             height:'400px',
+//             series: [
+//                 {
+//                     palette: {
+//                         stops: [
+//                             [0, '#618242'],
+//                             [100, '#d9d9d9']
+//                         ]
+//                     },
+//                     points: [
+//                         {x:'B Corporation', y:productResponse.data.products[idx].brand.bCorp},
+//                         {x:'Ethically Made', y:productResponse.data.products[idx].brand.ethicallyMade},
+//                         {x:'Donates to Charities', y:productResponse.data.products[idx].brand.donateToCharities},
+//                         {x:'Vegan', y:productResponse.data.products[idx].brand.vegan},
+//                         {x:'Organic', y:productResponse.data.products[idx].brand.percentOrganic},
+//                         {x:'Carbon Neutral', y:productResponse.data.products[idx].brand.percentOrganic},
+//                         {x:'Uses Recycled Materials', y:productResponse.data.products[idx].brand.recycledMaterialsUsed}
+//                     ]
+//                 }
+//             ]
+//         })
+//         productPageImage.innerHTML = `<img id='productPageImage' src='${productResponse.data.products[idx].mainImage}'>`
+//         productPageInfo.innerHTML = `<h1 id='productPageName'>${productResponse.data.products[idx].name}</h1><p id='productPageBrand'>${productResponse.data.products[idx].brand.name}</p><p id='productPagePrice'>$${productResponse.data.products[idx].price}</p><button id='productPageBuyButton'><a id='buyNowLink' href=${productResponse.data.products[idx].link}>Buy Now</a></button><p id='productPageSize'>Sizes Available: ${productResponse.data.products[idx].size}</p><p id='productPageDescription'>${productResponse.data.products[idx].description}</p>`
+//         brandInfoChart.innerHTML = `<h2>${productResponse.data.products[idx].brand.name}'s Score</h2>${productPageChart}`
+
+//     })
+// })
+
 product.forEach(async(elem,idx) =>{
     
     elem.addEventListener('click', async()=>{
-        console.log('clicked')
         // const productResponse = await axios.get('http://localhost:3001/api/products')
         productPage.style.display = 'block'
         brandInfoChart.style.display = 'block'
@@ -484,8 +595,21 @@ product.forEach(async(elem,idx) =>{
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
         footer.style.display = 'none'
+        let imageElement = elem.querySelector('.productImage')
+        let image = imageElement.getAttributeNode('src').value
+        let name = elem.querySelector('.productName').innerHTML
+        let price = elem.querySelector('.productPrice').innerHTML
+        let brand = elem.querySelector('.productBrand').innerHTML
+        let size = elem.querySelector('.productSize').innerHTML
+        trackerArray = []
         // productPageChart.setAttribute('id','productPageChart')
         const productResponse = await axios.get('http://localhost:3001/api/products')
+        for (let i=0;i<productResponse.data.products.length;i++){
+            if(productResponse.data.products[i].name === name){
+                trackerArray.push(i)
+            }
+        }
+
         const productPageChart = new JSC.Chart('brandInfoChart', {
             type: 'horizontal column',
             width:'800px',
@@ -499,21 +623,24 @@ product.forEach(async(elem,idx) =>{
                         ]
                     },
                     points: [
-                        {x:'B Corporation', y:productResponse.data.products[idx].brand.bCorp},
-                        {x:'Ethically Made', y:productResponse.data.products[idx].brand.ethicallyMade},
-                        {x:'Donates to Charities', y:productResponse.data.products[idx].brand.donateToCharities},
-                        {x:'Vegan', y:productResponse.data.products[idx].brand.vegan},
-                        {x:'Organic', y:productResponse.data.products[idx].brand.percentOrganic},
-                        {x:'Carbon Neutral', y:productResponse.data.products[idx].brand.percentOrganic},
-                        {x:'Uses Recycled Materials', y:productResponse.data.products[idx].brand.recycledMaterialsUsed}
+                        {x:'B Corporation', y:productResponse.data.products[trackerArray[0]].brand.bCorp},
+                        {x:'Ethically Made', y:productResponse.data.products[trackerArray[0]].brand.ethicallyMade},
+                        {x:'Donates to Charities', y:productResponse.data.products[trackerArray[0]].brand.donateToCharities},
+                        {x:'Vegan', y:productResponse.data.products[trackerArray[0]].brand.vegan},
+                        {x:'Organic', y:productResponse.data.products[trackerArray[0]].brand.percentOrganic},
+                        {x:'Carbon Neutral', y:productResponse.data.products[trackerArray[0]].brand.percentOrganic},
+                        {x:'Uses Recycled Materials', y:productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed}
                     ]
                 }
             ]
         })
-        productPageImage.innerHTML = `<img id='productPageImage' src='${productResponse.data.products[idx].mainImage}'>`
-        productPageInfo.innerHTML = `<h1 id='productPageName'>${productResponse.data.products[idx].name}</h1><p id='productPageBrand'>${productResponse.data.products[idx].brand.name}</p><p id='productPagePrice'>$${productResponse.data.products[idx].price}</p><button id='productPageBuyButton'><a id='buyNowLink' href=${productResponse.data.products[idx].link}>Buy Now</a></button><p id='productPageSize'>Sizes Available: ${productResponse.data.products[idx].size}</p><p id='productPageDescription'>${productResponse.data.products[idx].description}</p>`
-        brandInfoChart.innerHTML = `<h2>${productResponse.data.products[idx].brand.name}'s Score</h2>${productPageChart}`
-    
+        let productImage = document.querySelector('.productsPageImage')
+        console.log(image)
+        productImage.setAttribute('src', image)
+        console.log(productImage)
+        productPageInfo.innerHTML = `<h1 id='productPageName'>${name}</h1><p id='productPageBrand'>${brand}</p><p id='productPagePrice'>${price}</p><button id='productPageBuyButton'><a id='buyNowLink' href=${productResponse.data.products[trackerArray[0]].link}>Buy Now</a></button><p id='productPageSize'>Sizes Available: ${size}</p><p id='productPageDescription'>${productResponse.data.products[trackerArray[0]].description}</p>`
+        brandInfoChart.innerHTML = `<h2>${productResponse.data.products[trackerArray[0]].brand.name}'s Score</h2>${productPageChart}`
+
     })
 })
 
