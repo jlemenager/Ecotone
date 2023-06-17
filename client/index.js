@@ -618,37 +618,51 @@ product.forEach(async(elem,idx) =>{
                 trackerArray.push(i)
             }
         }
-
-        const productPageChart = new JSC.Chart('brandInfoChart', {
-            type: 'horizontal column',
-            width:'800px',
-            height:'400px',
-            series: [
-                {
-                    palette: {
-                        stops: [
-                            [0, '#618242'],
-                            [100, '#d9d9d9']
-                        ]
-                    },
-                    points: [
-                        {x:'B Corporation', y:productResponse.data.products[trackerArray[0]].brand.bCorp},
-                        {x:'Ethically Made', y:productResponse.data.products[trackerArray[0]].brand.ethicallyMade},
-                        {x:'Donates to Charities', y:productResponse.data.products[trackerArray[0]].brand.donateToCharities},
-                        {x:'Vegan', y:productResponse.data.products[trackerArray[0]].brand.vegan},
-                        {x:'Organic', y:productResponse.data.products[trackerArray[0]].brand.percentOrganic},
-                        {x:'Carbon Neutral', y:productResponse.data.products[trackerArray[0]].brand.percentOrganic},
-                        {x:'Uses Recycled Materials', y:productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed}
-                    ]
-                }
-            ]
+        const productPageChart = new Chart('myChart', {
+            type:'horizontalBar',
+            data: {
+                labels: ['B Corporation', 'Ethically Sourced', 'Donates to Charities', 'Vegan', 'Organic', 'Carbon Neutral', 'Uses Recycled Materials'],
+                datasets: [{
+                    label: 'Ecotone Score',
+                    backgroundColor: ['#587F16', '#84A166', '#538014', '#19410D', '#618242', '#7EB487', '#315E23'],
+                    data: [productResponse.data.products[trackerArray[0]].brand.bCorp, productResponse.data.products[trackerArray[0]].brand.ethicallyMade, productResponse.data.products[trackerArray[0]].brand.donateToCharities, productResponse.data.products[trackerArray[0]].brand.vegan, productResponse.data.products[trackerArray[0]].brand.percentOrganic, productResponse.data.products[trackerArray[0]].brand.percentCarbonNeutral, productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed]
+                }],
+                options: {
+                    legend_title: {display:false},
+                },
+            }
         })
+        // const productPageChart = new JSC.Chart('brandInfoChart', {
+        //     type: 'horizontal column',
+        //     width:'800px',
+        //     height:'400px',
+        //     series: [
+        //         {
+        //             palette: {
+        //                 stops: [
+        //                     [0, '#618242'],
+        //                     [100, '#d9d9d9']
+        //                 ]
+        //             },
+        //             points: [
+        //                 {x:'B Corporation', y:productResponse.data.products[trackerArray[0]].brand.bCorp},
+        //                 {x:'Ethically Made', y:productResponse.data.products[trackerArray[0]].brand.ethicallyMade},
+        //                 {x:'Donates to Charities', y:productResponse.data.products[trackerArray[0]].brand.donateToCharities},
+        //                 {x:'Vegan', y:productResponse.data.products[trackerArray[0]].brand.vegan},
+        //                 {x:'Organic', y:productResponse.data.products[trackerArray[0]].brand.percentOrganic},
+        //                 {x:'Carbon Neutral', y:productResponse.data.products[trackerArray[0]].brand.carbonNeutral},
+        //                 {x:'Uses Recycled Materials', y:productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed}
+        //             ]
+        //         }
+        //     ]
+        // })
         let productImage = document.querySelector('.productsPageImage')
         console.log(image)
         productImage.setAttribute('src', image)
         console.log(productImage)
         productPageInfo.innerHTML = `<h1 id='productPageName'>${name}</h1><p id='productPageBrand'>${brand}</p><p id='productPagePrice'>${price}</p><button id='productPageBuyButton'><a id='buyNowLink' href=${productResponse.data.products[trackerArray[0]].link}>Buy Now</a></button><p id='productPageSize'>Sizes Available: ${size}</p><p id='productPageDescription'>${productResponse.data.products[trackerArray[0]].description}</p>`
-        brandInfoChart.innerHTML = `<h2>${productResponse.data.products[trackerArray[0]].brand.name}'s Score</h2>${productPageChart}`
+        brandInfoChart.insertAdjacentHTML('afterbegin', `<h2>${productResponse.data.products[trackerArray[0]].brand.name}'s Score</h2>`)
+        brandInfoChart.style.display = 'block'
 
     })
 })

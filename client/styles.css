@@ -518,6 +518,8 @@ h3{
 }
 
 #detailsContainerRight{
+    display:flex;
+    flex-direction: column;
     margin: 0 0 0 50px;
     width: 50%;
 }
@@ -591,8 +593,7 @@ h3{
 }
 
 .brandInfoChart{
-    margin-top:100px;
-    display:none;
+    margin-top:50px;
 }
 
 /* CRUD */
