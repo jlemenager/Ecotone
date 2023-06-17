@@ -122,15 +122,17 @@ const displayBrandsFromModal = async(brand) => {
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
     const response = await axios.get('http://localhost:3001/api/products')
-    product.forEach((elem, idx)=> {
-        if(brand.target.innerHTML === response.data.products[idx].brand.name){
-            elem.style.display = 'block'
-            elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
-        } else {
-            console.log(`Not from ${response.data.products[idx].brand.name}`)
-            elem.style.display = 'none'
-            elem.innerHTML = ''
+    let brandsArray = []
+        for(let i =0;i<response.data.products.length;i++){
+            if(brand.target.innerHTML === response.data.products[i].brand.name){
+                brandsArray.push(i)
+            } else {
+                console.log(`This is from ${response.data.products[i].brand.name}`)
+            }
         }
+    brandsArray.forEach((elem, idx)=> {
+            document.querySelectorAll('.product')[idx].style.display = 'block'
+            document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
 })
 }
 
@@ -159,28 +161,35 @@ const typingEffect = () => {
         l++
         setTimeout(typingEffect,typeSpeed)
     } else if (l===typewriterText.length && typewriterText === 'save lives?'){
+        setTimeout(()=>{
         l=0
         typewriterText = 'protect land?'
         placeForTypewriterText.innerHTML = ''
-        setTimeout(typingEffect,500)
+        setTimeout(typingEffect,100)
+    },500)
     } else if (l<typewriterText.length && typewriterText === 'protect land?'){
         placeForTypewriterText.innerHTML += typewriterText.charAt(l)
         l++
         setTimeout(typingEffect,typeSpeed)
     } else if (l===typewriterText.length && typewriterText === 'protect land?'){
+        setTimeout(()=>{
         l=0
         typewriterText = 'boost eco-tech?'
         placeForTypewriterText.innerHTML = ''
-        setTimeout(typingEffect,500)
+        setTimeout(typingEffect, 100)
+        }
+        ,500)
     } else if (l<typewriterText.length && typewriterText === 'boost eco-tech?'){
         placeForTypewriterText.innerHTML += typewriterText.charAt(l)
         l++
         setTimeout(typingEffect,typeSpeed)
     } else if (l===typewriterText.length && typewriterText === 'boost eco-tech?'){
+        setTimeout(()=>{
         l=0
         typewriterText = 'save lives?'
         placeForTypewriterText.innerHTML = ''
-        setTimeout(typingEffect,500)
+        setTimeout(typingEffect,100)
+    },500)
     }
 }
 
