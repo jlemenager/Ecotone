@@ -639,6 +639,14 @@ product.forEach(async(elem,idx) =>{
                     borderColor: ['#618242','#618242','#618242','#618242','#618242','#618242','#618242'],
                     borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
             }
         })
 
