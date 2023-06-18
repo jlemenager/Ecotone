@@ -603,14 +603,24 @@ product.forEach(async(elem,idx) =>{
         products.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
-        footer.style.display = 'none'
+        // footer.style.display = 'none'
         let imageElement = elem.querySelector('.productImage')
         let image = imageElement.getAttributeNode('src').value
         let name = elem.querySelector('.productName').innerHTML
         let price = elem.querySelector('.productPrice').innerHTML
         let brand = elem.querySelector('.productBrand').innerHTML
         let size = elem.querySelector('.productSize').innerHTML
-        trackerArray = []
+        let trackerArray = []
+        console.log(trackerArray)
+        const removeData = () =>{
+            productPageChart.data.datasets.forEach((dataset)=>{
+                dataset.data = []
+            })
+            productPageChart.update()
+        }
+        product.forEach((elem)=>{
+            elem.addEventListener('click',()=>{removeData()})
+    })
         // productPageChart.setAttribute('id','productPageChart')
         const productResponse = await axios.get('http://localhost:3001/api/products')
         for (let i=0;i<productResponse.data.products.length;i++){
@@ -625,13 +635,13 @@ product.forEach(async(elem,idx) =>{
                 datasets: [{
                     label: 'Ecotone Score',
                     backgroundColor: '#d9d9d9',
-                    data: [productResponse.data.products[trackerArray[0]].brand.bCorp, productResponse.data.products[trackerArray[0]].brand.ethicallyMade, productResponse.data.products[trackerArray[0]].brand.donateToCharities, productResponse.data.products[trackerArray[0]].brand.vegan, productResponse.data.products[trackerArray[0]].brand.percentOrganic, productResponse.data.products[trackerArray[0]].brand.percentCarbonNeutral, productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed]
-                }],
-                options: {
-                    legend_title: {display:false},
-                },
+                    data: [productResponse.data.products[trackerArray[0]].brand.bCorp, productResponse.data.products[trackerArray[0]].brand.ethicallyMade, productResponse.data.products[trackerArray[0]].brand.donateToCharities, productResponse.data.products[trackerArray[0]].brand.vegan, productResponse.data.products[trackerArray[0]].brand.percentOrganic, productResponse.data.products[trackerArray[0]].brand.percentCarbonNeutral, productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed],
+                    borderColor: ['#618242','#618242','#618242','#618242','#618242','#618242','#618242'],
+                    borderWidth: 1
+                }]
             }
         })
+
         // const productPageChart = new JSC.Chart('brandInfoChart', {
         //     type: 'horizontal column',
         //     width:'800px',
@@ -657,15 +667,22 @@ product.forEach(async(elem,idx) =>{
         //     ]
         // })
         let productImage = document.querySelector('.productsPageImage')
-        console.log(image)
         productImage.setAttribute('src', image)
-        console.log(productImage)
         productPageInfo.innerHTML = `<h1 id='productPageName'>${name}</h1><p id='productPageBrand'>${brand}</p><p id='productPagePrice'>${price}</p><button id='productPageBuyButton'><a id='buyNowLink' href=${productResponse.data.products[trackerArray[0]].link}>Buy Now</a></button><p id='productPageSize'>Sizes Available: ${size}</p><p id='productPageDescription'>${productResponse.data.products[trackerArray[0]].description}</p>`
-        brandInfoChart.insertAdjacentHTML('afterbegin', `<h2>${productResponse.data.products[trackerArray[0]].brand.name}'s Score</h2>`)
         brandInfoChart.style.display = 'block'
+        console.log(trackerArray)
+        console.log(productPageChart.data.datasets.data)
 
     })
 })
+
+// document.addEventListener('click', ()=>{
+//     if (productPage.style.display === 'none'){
+//         trackerArray = []
+//     }
+// })
+
+
 
 //GO TO HOME PAGE
 
