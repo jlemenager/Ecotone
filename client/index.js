@@ -166,7 +166,7 @@ const typingEffect = () => {
         typewriterText = 'protect land?'
         placeForTypewriterText.innerHTML = ''
         setTimeout(typingEffect,100)
-    },500)
+    },700)
     } else if (l<typewriterText.length && typewriterText === 'protect land?'){
         placeForTypewriterText.innerHTML += typewriterText.charAt(l)
         l++
@@ -178,7 +178,7 @@ const typingEffect = () => {
         placeForTypewriterText.innerHTML = ''
         setTimeout(typingEffect, 100)
         }
-        ,500)
+        ,700)
     } else if (l<typewriterText.length && typewriterText === 'boost eco-tech?'){
         placeForTypewriterText.innerHTML += typewriterText.charAt(l)
         l++
@@ -189,7 +189,7 @@ const typingEffect = () => {
         typewriterText = 'save lives?'
         placeForTypewriterText.innerHTML = ''
         setTimeout(typingEffect,100)
-    },500)
+    },700)
     }
 }
 
@@ -624,7 +624,7 @@ product.forEach(async(elem,idx) =>{
                 labels: ['B Corporation', 'Ethically Sourced', 'Donates to Charities', 'Vegan', 'Organic', 'Carbon Neutral', 'Uses Recycled Materials'],
                 datasets: [{
                     label: 'Ecotone Score',
-                    backgroundColor: ['#587F16', '#84A166', '#538014', '#19410D', '#618242', '#7EB487', '#315E23'],
+                    backgroundColor: '#d9d9d9',
                     data: [productResponse.data.products[trackerArray[0]].brand.bCorp, productResponse.data.products[trackerArray[0]].brand.ethicallyMade, productResponse.data.products[trackerArray[0]].brand.donateToCharities, productResponse.data.products[trackerArray[0]].brand.vegan, productResponse.data.products[trackerArray[0]].brand.percentOrganic, productResponse.data.products[trackerArray[0]].brand.percentCarbonNeutral, productResponse.data.products[trackerArray[0]].brand.recycledMaterialsUsed]
                 }],
                 options: {
