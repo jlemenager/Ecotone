@@ -7,6 +7,21 @@ let product = document.querySelectorAll('.product')
 const logo = document.querySelector('#logo')
 const searchBar = document.querySelector('#searchBar')
 
+const config = {
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': '*',
+        'api-key': process.env.APIKEY
+    },
+}
+
+const data = {
+    "collection":"",
+    "database":"ecotoneDatabase",
+    "dataSource":"Cluster0",
+    "projection": {"_id": 1}
+}
+
     //Display Product List Constants
 
 // const dropdownOptions = document.querySelectorAll('select')
@@ -968,3 +983,17 @@ document.querySelector('#submitUserInfoButton').addEventListener('click', ()=>{
 })
 document.querySelector('#submitLogoutButton').addEventListener('click', updateUserLogout)
 document.querySelector('#submitDeleteAccountButton').addEventListener('click', deleteAccount)
+
+// MongoDB Atlas
+
+// curl --location --request POST 'https://us-east-2.aws.data.mongodb-api.com/app/data-fdivb/endpoint/data/v1/action/findOne' \
+// --header 'Content-Type: application/json' \
+// --header 'Access-Control-Request-Headers: *' \
+// --header 'api-key: MzmmAGWwR9ki94781xeYp1LX4zYEXsjXhbUGVcy0oS8WR2sMXW95bCJtY4Kiej67' \
+// --data-raw '{
+//     "collection":"<COLLECTION_NAME>",
+//     "database":"<DATABASE_NAME>",
+//     "dataSource":"Cluster0",
+//     "projection": {"_id": 1}
+// }'
+

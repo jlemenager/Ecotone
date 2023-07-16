@@ -30,6 +30,18 @@ const createCategories = async() => {
             gender: 'Women'
         },
         {
+            name: 'Crewnecks',
+            gender: 'Neutral'
+        },
+        {
+            name: 'Crewnecks',
+            gender: 'Men'
+        },
+        {
+            name: 'Crewnecks',
+            gender: 'Women'
+        },
+        {
             name: 'Jackets',
             gender: 'Neutral'
         },
@@ -54,15 +66,63 @@ const createCategories = async() => {
             gender: 'Women'
         },
         {
-            name: 'Sweaters',
+            name: 'Sweatpants',
             gender: 'Neutral'
         },
         {
-            name: 'Sweaters',
+            name: 'Sweatpants',
             gender: 'Men'
         },
         {
-            name: 'Sweaters',
+            name: 'Sweatpants',
+            gender: 'Women'
+        },
+        {
+            name: 'Shorts',
+            gender: 'Neutral'
+        },
+        {
+            name: 'Shorts',
+            gender: 'Men'
+        },
+        {
+            name: 'Shorts',
+            gender: 'Women'
+        },
+        {
+            name: 'Leggings',
+            gender: 'Neutral'
+        },
+        {
+            name: 'Leggings',
+            gender: 'Men'
+        },
+        {
+            name: 'Leggings',
+            gender: 'Women'
+        },
+        {
+            name: 'Jeans',
+            gender: 'Neutral'
+        },
+        {
+            name: 'Jeans',
+            gender: 'Men'
+        },
+        {
+            name: 'Jeans',
+            gender: 'Women'
+        },
+        {
+            name: 'Socks',
+            gender: 'Neutral'
+        },
+        {
+            name: 'Socks',
+            gender: 'Men'
+        },
+        {
+            name: 'Socks',
             gender: 'Women'
         },
         {
