@@ -107,7 +107,7 @@ const displayCategoriesFromModal = async(category) => {
     createAccountPage.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
-    const response = await axios.get('http://localhost:3001/api/products')
+    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
     product.forEach((elem, idx)=> {
         console.log('forEach working')
         if(category.target.innerHTML === response.data.products[idx].category.name){
@@ -136,7 +136,7 @@ const displayBrandsFromModal = async(brand) => {
     createAccountPage.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
-    const response = await axios.get('http://localhost:3001/api/products')
+    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
     let brandsArray = []
         for(let i =0;i<response.data.products.length;i++){
             if(brand.target.innerHTML === response.data.products[i].brand.name){
@@ -291,7 +291,7 @@ const changeSelectedCategory = async(category) => {
         if (categories.length > 1){
             categories.pop()
         }
-        const response = await axios.get('http://localhost:3001/api/products')
+        const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
         productPage.style.display = 'none'
@@ -346,7 +346,7 @@ const changeSelectedBrand = async(brand) => {
         if (brands.length > 1){
         brands.pop()
         }
-        const response = await axios.get('http://localhost:3001/api/products')
+        const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
         aboutPage.style.display = 'none'
@@ -404,7 +404,7 @@ const displayProducts = async() => {
 displayProducts()
 
 const displayAllProducts = async() => {
-    const response = await axios.get('http://localhost:3001/api/products')
+    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
         aboutPage.style.display = 'none'
@@ -476,7 +476,7 @@ const showSearch = async() => {
     let searchList = []
     let sortedList = []
     let x = 0
-    const response = await axios.get('http://localhost:3001/api/products')
+    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
     
     let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|white?|gray?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
       if (searchBarMatches.length>0){
@@ -637,7 +637,7 @@ product.forEach(async(elem,idx) =>{
             elem.addEventListener('click',()=>{removeData()})
     })
         // productPageChart.setAttribute('id','productPageChart')
-        const productResponse = await axios.get('http://localhost:3001/api/products')
+        const productResponse = await axios.get('http://ecotone-production.up.railway.app/api/products')
         for (let i=0;i<productResponse.data.products.length;i++){
             if(productResponse.data.products[i].name === name){
                 trackerArray.push(i)
@@ -731,7 +731,7 @@ let x = 1
     //Functions
 
 const showProductBanner = async(req,res)=>{
-    const response = await axios.get('http://localhost:3001/api/products')
+    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
     let num = Math.round(Math.random()*12)
     for(let i = 0; i<response.data.products.length;i++){
         bannerProductPhoto.innerHTML = `<img class='productBannerImage' src='${response.data.products[num].mainImage}'>`
@@ -782,7 +782,7 @@ const createUser = async() => {
     const emailInput = document.querySelector('#createEmail').value
     const passwordInput = document.querySelector('#createPassword').value
 
-    await axios.post('http://localhost:3001/api/users/post', {
+    await axios.post('http://ecotone-production.up.railway.app/api/users/post', {
         username: usernameInput,
         loggedIn: true,
         email: emailInput,
@@ -812,18 +812,18 @@ const updateUserLogin = async() => {
     const emailInput = document.querySelector('#insertEmail').value
     const passwordInput = document.querySelector('#insertPassword').value
     
-    const user = await axios.get(`http://localhost:3001/api/users`)
+    const user = await axios.get(`http://ecotone-production.up.railway.app/api/users`)
     let userData = user.data.users
     console.log(userData)
     userData.forEach(async(elem)=>{
-        await axios.put(`http://localhost:3001/api/users/put/${elem._id}`, {
+        await axios.put(`http://ecotone-production.up.railway.app/api/users/put/${elem._id}`, {
             loggedIn:false
         })
     })
     for(let i = 0;i<userData.length;i++){
         if(usernameInput === userData[i].username && emailInput === userData[i].email && passwordInput === userData[i].password){
             if(userData[i].loggedIn === false){
-                await axios.put(`http://localhost:3001/api/users/put/${userData[i]._id}`, {
+                await axios.put(`http://ecotone-production.up.railway.app/api/users/put/${userData[i]._id}`, {
                     loggedIn:true
                 })
                 console.log('logged in')
@@ -858,12 +858,12 @@ const updateUserInfo = async() => {
     const usernameInput = document.querySelector('#changeUsername').value
     const emailInput = document.querySelector('#changeEmail').value
     const passwordInput = document.querySelector('#changePassword').value
-    const user = await axios.get(`http://localhost:3001/api/users`)
+    const user = await axios.get(`http://ecotone-production.up.railway.app/api/users`)
     let userData = user.data.users
     console.log(userData)
     for(let i = 0;i<userData.length;i++){
         if(userData[i].loggedIn === true){
-            await axios.put(`http://localhost:3001/api/users/put/${userData[i]._id}`, {
+            await axios.put(`http://ecotone-production.up.railway.app/api/users/put/${userData[i]._id}`, {
                 username: usernameInput,
                 loggedIn:true,
                 email: emailInput,
@@ -894,12 +894,12 @@ const displayLogoutPage = () =>{
 }
 
 const updateUserLogout = async() => {
-    const user = await axios.get(`http://localhost:3001/api/users`)
+    const user = await axios.get(`http://ecotone-production.up.railway.app/api/users`)
     let userData = user.data.users
 
     for(let i = 0;i<userData.length;i++){
         if(userData[i].loggedIn === true){
-            await axios.put(`http://localhost:3001/api/users/put/${userData[i]._id}`, {
+            await axios.put(`http://ecotone-production.up.railway.app/api/users/put/${userData[i]._id}`, {
                 loggedIn:false,
             })
             console.log('Logged out')
@@ -928,11 +928,11 @@ const displayDeleteAccountPage = () =>{
 }
 
 const deleteAccount = async() => {
-    const users = await axios.get('http://localhost:3001/api/users')
+    const users = await axios.get('http://ecotone-production.up.railway.app/api/users')
     let userData = users.data.users
     userData.forEach(async(elem)=>{
         if (elem.loggedIn === true){
-            await axios.delete(`http://localhost:3001/api/users/delete/${elem._id}`)
+            await axios.delete(`http://ecotone-production.up.railway.app/api/users/delete/${elem._id}`)
             console.log('Account deleted')
             userIcon.setAttribute('src', 'images/userIcon.png')
             alert('Your account is successfully deleted.')
