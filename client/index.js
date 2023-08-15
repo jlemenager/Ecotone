@@ -11,7 +11,7 @@ const config = {
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Request-Headers': '*',
-        'api-key': process.env.APIKEY
+        // 'api-key': process.env.APIKEY
     },
 }
 
