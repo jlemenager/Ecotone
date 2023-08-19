@@ -4,7 +4,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(cors({
-    origin: 'https://ecotone.surge.sh'
+    origin: '*'
 }))
 app.use(express.json())
 
