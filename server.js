@@ -3,7 +3,9 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://ecotone.surge.sh'
+}))
 app.use(express.json())
 
 db.on('error', console.error.bind(console, 'MongoDB not connecting'))
