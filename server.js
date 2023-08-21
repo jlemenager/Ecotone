@@ -4,6 +4,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
 
+const PORT = process.env.DATABASE_URL || 3001
+
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
@@ -18,8 +20,6 @@ app.use((req, res, next) => {
   });
 
 db.on('error', console.error.bind(console, 'MongoDB not connecting'))
-
-const PORT = process.env.DATABASE_URL || 3001
 
 app.listen(PORT, ()=>console.log(`Server running on Port ${PORT}`))
 
