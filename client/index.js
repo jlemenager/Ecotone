@@ -107,7 +107,7 @@ const displayCategoriesFromModal = async(category) => {
     createAccountPage.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
-    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
+    const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
     product.forEach((elem, idx)=> {
         console.log('forEach working')
         if(category.target.innerHTML === response.data.products[idx].category.name){
@@ -136,7 +136,7 @@ const displayBrandsFromModal = async(brand) => {
     createAccountPage.style.display = 'none'
     frontPageMain.style.display = 'none'
     frontPageBanners.style.display = 'none'
-    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
+    const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
     let brandsArray = []
         for(let i =0;i<response.data.products.length;i++){
             if(brand.target.innerHTML === response.data.products[i].brand.name){
@@ -291,7 +291,7 @@ const changeSelectedCategory = async(category) => {
         if (categories.length > 1){
             categories.pop()
         }
-        const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
+        const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
         productPage.style.display = 'none'
@@ -346,7 +346,7 @@ const changeSelectedBrand = async(brand) => {
         if (brands.length > 1){
         brands.pop()
         }
-        const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
+        const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
         aboutPage.style.display = 'none'
@@ -404,7 +404,7 @@ const displayProducts = async() => {
 displayProducts()
 
 const displayAllProducts = async() => {
-    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
+    const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
         aboutPage.style.display = 'none'
@@ -476,7 +476,7 @@ const showSearch = async() => {
     let searchList = []
     let sortedList = []
     let x = 0
-    const response = await axios.get('http://ecotone-production.up.railway.app/api/products')
+    const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
     
     let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|white?|gray?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
       if (searchBarMatches.length>0){
