@@ -645,7 +645,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, XL, 2XL, 3XL, 4XL',
             inStock: true,
             description: "Relaxed, oversized hoodie with large hood and forest pocket panel design. Ditch the polyester sweatshirts, and upgrade in sustainability and style. This two-toned hoodie in dark green and beige is a unique addition to any wardrobe.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/FadingForestHoodie_updated_1080x.jpg?v=1683212855'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/FadingForestHoodieFlat_web_edit.jpg?v=1692810787&width=1800'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/logo_1_900x.jpg?v=1685459524'),
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/logo_3_900x.jpg?v=1685459524')
         },
@@ -827,7 +827,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L',
             inStock: true,
             description: "Your favorite tee - in dress form. Effortlessly chic with its relaxed, flattering fit. Fun to wear and easy to layer, we give the classic t-shirt dress a radical upgrade in sustainability and style. Heather charcoal gray and made with medium-weight organic cotton jersey for the perfect balance of structure and flow.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/flower_900x.jpg?v=1682694915'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/Dress_PetitJardin_1.jpg?v=1692836080&width=1800'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/petit-jardin-organic-t-shirt-dress-organic-dress-happy-earth-apparel-661286_1080x.jpg?v=1682694915'),
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/petit-jardin-organic-t-shirt-dress-organic-dress-happy-earth-apparel-457167_1080x.jpg?v=1682694915')
         },
@@ -841,7 +841,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, XL, 2XL, 3XL',
             inStock: true,
             description: "Fitted top, elegant v-neck, long sleeves and flowy skirt - this midi style cuts a classic silhouette. Made from premium organic cotton, this dress is the very picture of versatility and style. It's the LBD every closet needs.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/fitflare_1080x.jpg?v=1682694968'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/Dress_BlackFit_Flare_1.jpg?v=1692835696&width=1800'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/black-organic-fit-flare-midi-dress-organic-dress-happy-earth-apparel-944433_1080x.jpg?v=1682694968'),
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/black-organic-fit-flare-midi-dress-organic-dress-happy-earth-apparel-596210_1080x.jpg?v=1682694968')
         },

@@ -109,7 +109,7 @@ const displayCategoriesFromModal = async(category) => {
     frontPageBanners.style.display = 'none'
     const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
     let categoriesArray = []
-    product.forEach((elem, idx)=> {
+    response.data.products.forEach((elem, idx)=> {
         console.log('forEach working')
         if(category.target.innerHTML === response.data.products[idx].category.name){
             console.log('categories match')
@@ -123,6 +123,7 @@ const displayCategoriesFromModal = async(category) => {
         //     elem.innerHTML = ''
         // }
     })
+    reset()
     categoriesArray.forEach((elem, idx)=> {
         document.querySelectorAll('.product')[idx].style.display = 'block'
         document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
@@ -145,13 +146,14 @@ const displayBrandsFromModal = async(brand) => {
     frontPageBanners.style.display = 'none'
     const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
     let brandsArray = []
-        for(let i =0;i<response.data.products.length;i++){
-            if(brand.target.innerHTML === response.data.products[i].brand.name){
-                brandsArray.push(i)
-            } else {
-                console.log(`This is from ${response.data.products[i].brand.name}`)
-            }
+    for(let i =0;i<response.data.products.length;i++){
+        if(brand.target.innerHTML === response.data.products[i].brand.name){
+            brandsArray.push(i)
+        } else {
+            console.log(`This is from ${response.data.products[i].brand.name}`)
         }
+    }
+    reset()
     brandsArray.forEach((elem, idx)=> {
             document.querySelectorAll('.product')[idx].style.display = 'block'
             document.querySelectorAll('.product')[idx].innerHTML = `<img class='productImage' src='${response.data.products[elem].mainImage}'><p class='productInfo productPrice'>$${response.data.products[elem].price}</p><p class='productInfo productName'>${response.data.products[elem].name}</p><p class='productInfo productBrand'>${response.data.products[elem].brand.name}</p><p class='productInfo productSize'>${response.data.products[elem].size}</p>`
