@@ -1,7 +1,8 @@
+const { DATABASE_URL } = require("../config");
 const mongoose = require('mongoose')
 
 mongoose
-.connect(process.env.DATABASE_URL)
+.connect(DATABASE_URL)
 .then(()=>console.log('MongoDB is running'))
 .catch((e)=>console.error('Connection error to MongoDB', e.message))
 
