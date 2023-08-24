@@ -637,7 +637,7 @@ product.forEach(async(elem,idx) =>{
             elem.addEventListener('click',()=>{removeData()})
     })
         // productPageChart.setAttribute('id','productPageChart')
-        const productResponse = await axios.get('http://ecotone-production.up.railway.app/api/products')
+        const productResponse = await axios.get('https://ecotone-production.up.railway.app/api/products')
         for (let i=0;i<productResponse.data.products.length;i++){
             if(productResponse.data.products[i].name === name){
                 trackerArray.push(i)
