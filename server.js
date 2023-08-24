@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 db.on('error', console.error.bind(console, 'MongoDB not connecting'))
 
-app.listen(PORT,'0.0.0.0', ()=>console.log(`Server running on Port ${PORT}`))
+app.listen(PORT, ()=>console.log(`Server running on Port ${PORT}`))
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
