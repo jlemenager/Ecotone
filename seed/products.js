@@ -101,7 +101,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, XL, 2XL, 3XL',
             inStock: true,
             description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1881_gray_1x1_73739feb-765c-40b7-bc17-c595ef3fc29a_1080x.jpg?v=1682019102'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/IMG_1879_gray.jpg?v=1686760859&width=1800'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1879_gray_1x1_f94daf8c-540e-44f1-83fe-f9c12ea27309_1080x.jpg?v=1681139618'),
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/p7_1080x.jpg?v=1682019102')
         },
