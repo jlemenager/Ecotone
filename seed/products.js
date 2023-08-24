@@ -87,7 +87,7 @@ const createProducts = async() => {
             size: 'S, M, L, XL, 3XL',
             inStock: true,
             description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1862_gray_1x1_4f04da7f-22ed-4fd5-93a7-c6898cbc2702_1080x.jpg?v=1682019081'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/IMG_1861_gray.jpg?v=1686760874&width=1600'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1861_gray_1x1_ea22112d-e186-4fd7-9985-50c7fdb9c4a5_1080x.jpg?v=1681138651'),
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/p5_1080x.jpg?v=1682019081')
         },
@@ -432,7 +432,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, 2XL',
             inStock: true,
             description: "Designed for comfort in all of life's adventures. A relaxed, ultra-soft organic cotton tee that's great for everyday wear: your go-to worry-free style that's made to live-in.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/GoldenMountains_web_1080x.jpg?v=1686750807'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/IMG_7919_web.jpg?v=1692804368&width=1600'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/golden-mountains-organic-long-sleeve-tee-happy-earth-apparel-713003_1080x.jpg?v=1686750807')
         },
         {
@@ -715,7 +715,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, XL, 2XL',
             inStock: true,
             description: "A warm-weather basic, upgraded. The distinctive herringbone pattern elevates the color and body of this crew, and is woven to be breathable, soft, and stretchy. Made from organic cotton with a touch of elastane, this crew has a natural, fluid drape and easily adapts to movement.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/Crew_Script_1080x.jpg?v=1687467512'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/herringbone.jpg?v=1692837807&width=1600'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/files/navy2_1080x.jpg?v=1687467512'),
             image3: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/IMG_1993_1x1_d89f8d81-daa4-44fb-856e-cef375bd117d_1080x.jpg?v=1687467512')
         },
