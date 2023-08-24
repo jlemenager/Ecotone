@@ -364,7 +364,7 @@ const createProducts = async() => {
             size: 'XS, S, M, L, XL',
             inStock: true,
             description: "Designed to be part of your regular rotation. A fitted, ultra-soft organic cotton tee that's great for everyday wear.",
-            mainImage: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/wild-146993_1080x.jpg?v=1659914827'),
+            mainImage: new URL('https://www.happyearthapparel.com/cdn/shop/files/Wild3x4.jpg?v=1688488997&width=1400'),
             image2: new URL('https://cdn.shopify.com/s/files/1/0272/1500/3781/products/wild-398024_1080x.jpg?v=1659914827')
         },
         {
