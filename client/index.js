@@ -427,7 +427,7 @@ const displayAllProducts = async() => {
         createAccountPage.style.display = 'none'
         frontPageMain.style.display = 'none'
         frontPageBanners.style.display = 'none'
-        product.forEach((elem,idx)=>{
+        response.data.forEach((elem,idx)=>{
             elem.innerHTML = `<img class='productImage' src='${response.data.products[idx].mainImage}'><p class='productInfo productPrice'>$${response.data.products[idx].price}</p><p class='productInfo productName'>${response.data.products[idx].name}</p><p class='productInfo productBrand'>${response.data.products[idx].brand.name}</p><p class='productInfo productSize'>${response.data.products[idx].size}</p>`
         })
 }
@@ -750,8 +750,8 @@ const showProductBanner = async(req,res)=>{
 
 
 document.querySelector('#bannerLeft').addEventListener('mouseenter', showProductBanner)
-document.querySelector('#bannerLeft').addEventListener('click', displayAllProducts)
-document.querySelector('#bannerRightTop').addEventListener('click', displayAllProducts)
+// document.querySelector('#bannerLeft').addEventListener('click', displayAllProducts)
+// document.querySelector('#bannerRightTop').addEventListener('click', displayAllProducts)
 document.querySelector('#bannerRightBottom').addEventListener('click', displayAbout)
 // document.querySelector('#frontPageBanners').addEventListener('mouseleave', ()=>{bannerProductPhoto.innerHTML = ''})
 
