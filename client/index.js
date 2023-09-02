@@ -79,6 +79,7 @@ const closeModal = () => {
 
 const displayAbout = () =>{
     aboutPage.style.display = 'block'
+    document.querySelector('.no-items').style.display = 'none'
     products.style.display = 'none'
     productPage.style.display = 'none'
     modal.style.display = 'none'
@@ -95,6 +96,7 @@ const displayAbout = () =>{
     
 const displayCategoriesFromModal = async(category) => {
     products.style.display = 'block'
+    document.querySelector('.no-items').style.display = 'none'
     productPage.style.display = 'none'
     aboutPage.style.display = 'none'
     modal.style.display = 'none'
@@ -132,6 +134,7 @@ const displayCategoriesFromModal = async(category) => {
 
 const displayBrandsFromModal = async(brand) => {
     products.style.display = 'block'
+    document.querySelector('.no-items').style.display = 'none'
     productPage.style.display = 'none'
     aboutPage.style.display = 'none'
     modal.style.display = 'none'
@@ -303,6 +306,7 @@ const changeSelectedCategory = async(category) => {
         const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
+        document.querySelector('.no-items').style.display = 'none'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
         brandInfoChart.innerHTML = ''
@@ -358,6 +362,7 @@ const changeSelectedBrand = async(brand) => {
         const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
+        document.querySelector('.no-items').style.display = 'none'
         aboutPage.style.display = 'none'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
@@ -416,6 +421,7 @@ const displayAllProducts = async() => {
     const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
         document.querySelector('#productGrid').style.display = 'grid'
         products.style.display = 'block'
+        document.querySelector('.no-items').style.display = 'none'
         aboutPage.style.display = 'none'
         productPage.style.display = 'none'
         brandInfoChart.style.display = 'none'
@@ -434,6 +440,7 @@ const displayAllProducts = async() => {
 
 const reset = () => {
     products.style.display = 'block'
+    document.querySelector('.no-items').style.display = 'none'
     productPage.style.display = 'none'
     product.forEach((elem)=>{elem.style.display = 'none'})
     brandInfoChart.style.display = 'none'
@@ -445,6 +452,24 @@ const reset = () => {
     createAccountPage.style.display = 'none'
     aboutPage.style.display = 'none'
     frontPageMain.style.display = 'none'
+    frontPageBanners.style.display = 'none'
+}
+
+const noProducts = () => {
+    document.querySelector('.no-items').style.display = 'block'
+    document.querySelector('.no-items').innerText = 'No items that match that search'
+    products.style.display = 'none'
+    productPage.style.display = 'none'
+    product.forEach((elem)=>{elem.style.display = 'none'})
+    brandInfoChart.style.display = 'none'
+    brandInfoChart.innerHTML = ''
+    deleteAccountPage.style.display = 'none'
+    logoutPage.style.display = 'none'
+    updateUserInfoPage.style.display = 'none'
+    loginPage.style.display = 'none'
+    createAccountPage.style.display = 'none'
+    aboutPage.style.display = 'none'
+    document.querySelector('#frontPageMainGridLeft').style.display = 'none'
     frontPageBanners.style.display = 'none'
 }
 
@@ -487,17 +512,35 @@ const showSearch = async() => {
     let x = 0
     const response = await axios.get('https://ecotone-production.up.railway.app/api/products')
     
-    let searchBarMatches = search.match(/(blue?|green?|red?|purple?|pink?|yellow?|black?|brown?|white?|gray?|tan?|t-shirts?|longsleeves?|sweaters?|sweatshirts?|socks?|shoes?|jackets?|coats?|neutral?|womens?|mens?)/gi)
-      if (searchBarMatches.length>0){
+    let searchBarMatches = search.match(/(blue|green|red|purple|pink|yellow|black|brown|white|gray|tan|t-shirts|t-shirt|tshirts|tshirt|longsleeves|hoodies|dresses|socks|shoes|jackets|neutral|womens|mens)/gi)
+    if (searchBarMatches){
         reset()
+        let newSearchBarMatches = []
+        searchBarMatches.forEach(element => {
+            let updatedElement = ''
+            if (element === 'T-Shirts' || element === 'T-Shirt' || element === 't-shirts' || element === 't-shirt' || element === 't shirts' || element === 't shirt' || element === 'tshirt' || element === 'tshirts' || element === 'T-shirts' ||  element === 'T-shirt'){
+                newSearchBarMatches.push('T-Shirts')
+            } else {
+                for (let i = 0; i<element.length; i++){
+                    if (i === 0){
+                        updatedElement += element.charAt(i).toUpperCase()
+                    } else {
+                        updatedElement += element.charAt(i).toLowerCase()
+                    } 
+                    console.log(element.charAt(i))
+                }
+                newSearchBarMatches.push(updatedElement)
+            }
+        })
+        console.log(searchBarMatches)
         //https://blog.gitnux.com/code/javascript-append-array/#:~:text=In%20JavaScript%2C%20you%20can%20append,using%20the%20Array%20Spread%20Operator.&text=Both%20of%20these%20methods%20will,without%20modifying%20the%20original%20arrays.
             for(let i = 0;i<response.data.products.length;i++){
                 let category = response.data.products[i].category.name
                 let color = response.data.products[i].color
                 let gender = response.data.products[i].category.gender
-                let categorySearch = searchBarMatches.filter(word => category.includes(word))
-                let colorSearch = searchBarMatches.filter(word => color.includes(word))
-                let genderSearch = searchBarMatches.filter(word => gender.includes(word))
+                let categorySearch = newSearchBarMatches.filter(word => category.includes(word))
+                let colorSearch = newSearchBarMatches.filter(word => color.includes(word))
+                let genderSearch = newSearchBarMatches.filter(word => gender.includes(word))
                 if(categorySearch.includes(response.data.products[i].category.name) && colorSearch.includes(response.data.products[i].color) && genderSearch.includes(response.data.products[i].category.gender)){
                     searchList.push(`A${i}`)
                     // document.querySelectorAll('.product')[i].innerHTML = `<img class='productImage' src='${response.data.products[i].mainImage}'><p class='productInfo productPrice'>$${response.data.products[i].price}</p><p class='productInfo productName'>${response.data.products[i].name}</p><p class='productInfo productBrand'>${response.data.products[i].brand.name}</p><p class='productInfo productSize'>${response.data.products[i].size}</p>`
@@ -513,26 +556,29 @@ const showSearch = async() => {
                     searchList.push(`E${i}`)
                 }
             }
-            searchList.sort()
-
-            
-            searchList.forEach((elem, idx)=>{
-                // elem.slice(0,1)
-                elem = elem.substring(1)
-                elem = parseInt(elem)
-                sortedList.push(elem)
-        })
-        sortedList.forEach((e)=>{
-                let constant = document.querySelectorAll('.product')[x]
-                x++
-                //https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/
-                constant.style.display = 'block'
-                constant.innerHTML = `<img class='productImage' src='${response.data.products[e].mainImage}'><p class='productInfo productPrice'>$${response.data.products[e].price}</p><p class='productInfo productName'>${response.data.products[e].name}</p><p class='productInfo productBrand'>${response.data.products[e].brand.name}</p><p class='productInfo productSize'>${response.data.products[e].size}</p>`
-                console.log('working')
-            
-        })
-        
-            }
+            if (searchList.length > 0){
+                searchList.sort()
+                searchList.forEach((elem, idx)=>{
+                    // elem.slice(0,1)
+                    elem = elem.substring(1)
+                    elem = parseInt(elem)
+                    sortedList.push(elem)
+                })
+                sortedList.forEach((e)=>{
+                    let constant = document.querySelectorAll('.product')[x]
+                    x++
+                    //https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/
+                    constant.style.display = 'block'
+                    constant.innerHTML = `<img class='productImage' src='${response.data.products[e].mainImage}'><p class='productInfo productPrice'>$${response.data.products[e].price}</p><p class='productInfo productName'>${response.data.products[e].name}</p><p class='productInfo productBrand'>${response.data.products[e].brand.name}</p><p class='productInfo productSize'>${response.data.products[e].size}</p>`
+                    console.log('working')
+                    
+                })
+            } else {
+                noProducts()
+            } 
+        } else {
+            noProducts()
+        } 
     }
 
     // const searchFilter = () => {
